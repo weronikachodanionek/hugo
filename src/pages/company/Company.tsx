@@ -4,7 +4,8 @@ import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { Desk } from "../../components";
+import { availablePlacesData } from "../../components/Desk/DeskData";
+import { Room } from "../../components";
 
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -41,7 +42,6 @@ const Company: React.FC = () => {
   return (
     <div className="App">
       <div>
-        <Desk />
         <label>Biurko</label>
         <input
           value={input}
@@ -49,6 +49,8 @@ const Company: React.FC = () => {
         />
         <button onClick={submit}>Wyslij</button>
       </div>
+
+     <Room availablePlacesData={availablePlacesData}  />
     </div>
   );
 };

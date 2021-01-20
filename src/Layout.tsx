@@ -5,7 +5,7 @@ import { Company } from "./pages";
 
 const Layout: React.FC = () => {
   return (
-    <div className={styles.layout}>
+    <div className={styles.layout}>      
       <Company />
     </div>
   );
