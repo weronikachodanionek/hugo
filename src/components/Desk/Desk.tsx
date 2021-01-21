@@ -1,7 +1,7 @@
 import React from "react";
 
 import styles from "./Desk.module.scss";
-import { IDesk } from "./DeskData";
+import { AvailabilityType, IDesk } from "./DeskData";
 // import "./Desk.scss";
 
 interface IDeskData {
@@ -14,7 +14,21 @@ const Desk: React.FC<IDeskData> = ({ desk }) => {
       <div className={styles.desk}>
         <h3>{desk.deskName}</h3>
         {desk.users.map((user) => (
-          <div key={user.id} className={styles.deskUSer}>{user.userName}</div>
+          <div key={user.id} className={styles.deskUSer}>
+            {user.userName}
+          </div>
+        ))}
+
+        <h3>Dostępność biurka</h3>
+        {desk.days.map((day) => (
+          <>
+            <div className={styles.deskUser}>Dzień: {day.date}</div>
+            <div className={styles.deskUser}>Dostępność: {day.description}</div>
+
+            {day.description === AvailabilityType.unavailable && (
+              <div className={styles.deskUser}>Kot: {day.user}</div>
+            )}
+          </>
         ))}
       </div>
     </>
