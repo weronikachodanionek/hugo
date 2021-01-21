@@ -1,0 +1,24 @@
+// import { useEffect, useState } from "react";
+// import { IRoom } from "../API/types";
+// import { getAllWorkplaces } from "../services/roomsService";
+
+// interface IRoomsData {
+//   rooms: IRoom[] | null;
+//   fetchRooms: () => void;
+// }
+
+// export default function useTripsData(): IRoomsData {
+//   const [rooms, setRooms] = useState<IRoom[] | null>(null);
+
+//   const fetchRooms = async (): Promise<void> => {
+//     const newRooms = await getAllWorkplaces();
+//     rooms ? setRooms([...rooms, ...newRooms]) : setRooms([...newRooms]);
+//   };
+
+//   useEffect(() => {
+//     fetchRooms();
+//     // eslint-disable-next-line
+//   }, []);
+
+//   return { rooms, fetchRooms };
+// }

@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import firebase from "firebase/app";
 import "firebase/firestore";
 import "firebase/auth";
-import { availablePlacesData } from "../../components/Desk/DeskData";
+import { getAllPlaces } from "../../API/fakeAPI";
 import { Room } from "../../components";
+import { IRoom } from "../../API/types";
 
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -26,6 +27,16 @@ firebase.initializeApp({
 
 const Company: React.FC = () => {
   const [input, setInput] = useState(""); // '' is the initial state value
+  const [places, setPlaces] = useState<IRoom[]>([]);
+
+  (function () {
+    /*eslint-disable */
+    getAllPlaces().then(
+      (places) => {console.log(places); setPlaces(places)},
+      (error) => console.log(error)
+    );
+    /*eslint-enable */
+  })();
 
   const docRef = firebase.firestore();
   // docRef.collection("desk");
@@ -50,7 +61,7 @@ const Company: React.FC = () => {
         <button onClick={submit}>Wyslij</button>
       </div>
 
-     <Room availablePlacesData={availablePlacesData}  />
+      <Room room={places[0]} />
     </div>
   );
 };

@@ -1,14 +1,15 @@
 import React from "react";
+import { AvailabilityType, IDesk } from "../../API/types";
 
 import styles from "./Desk.module.scss";
-import { AvailabilityType, IDesk } from "./DeskData";
 // import "./Desk.scss";
 
-interface IDeskData {
+interface IDeskProps {
   desk: IDesk;
 }
 
-const Desk: React.FC<IDeskData> = ({ desk }) => {
+const Desk: React.FC<IDeskProps> = ({ desk }) => {
+
   return (
     <>
       <div className={styles.desk}>
