@@ -1,4 +1,4 @@
-import { AvailabilityType,  IRoom } from "../types";
+import { AvailabilityType, IRoom } from "../types";
 
 export const Rooms: IRoom[] = [
   {

@@ -5,7 +5,7 @@ import { IDesk, IRoom } from "../../API/types";
 import styles from "./Room.module.scss";
 
 export interface IRoomProps {
-  room: IRoom
+  room: IRoom;
 }
 
 const Room: React.FC<IRoomProps> = ({ room }) => {

@@ -6,7 +6,8 @@ import "firebase/firestore";
 import "firebase/auth";
 import { getAllPlaces } from "../../API/fakeAPI";
 import { Room } from "../../components";
-import { IRoom } from "../../API/types";
+import { IDay, IDesk, IRoom } from "../../API/types";
+import Reservation from "../../components/Reservation/Reservation";
 
 // import { useAuthState } from "react-firebase-hooks/auth";
 // import { useCollectionData } from "react-firebase-hooks/firestore";
@@ -28,6 +29,7 @@ firebase.initializeApp({
 const Company: React.FC = () => {
   const [input, setInput] = useState(""); // '' is the initial state value
   const [places, setPlaces] = useState<IRoom[]>([]);
+  const [desk, setDesk] = useState<IDesk[]>([]);
 
   (function () {
     /*eslint-disable */
@@ -60,6 +62,8 @@ const Company: React.FC = () => {
         />
         <button onClick={submit}>Wyslij</button>
       </div>
+
+      <Reservation desk={desk[0]} reservation={places[0]}/>
 
       <Room room={places[0]} />
     </div>
