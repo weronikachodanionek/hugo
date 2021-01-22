@@ -6,7 +6,7 @@ import "firebase/firestore";
 import "firebase/auth";
 import { getAllPlaces } from "../../API/fakeAPI";
 import { Room } from "../../components";
-import { IDay, IDesk, IRoom } from "../../API/types";
+import { IDesk, IRoom } from "../../API/types";
 import Reservation from "../../components/Reservation/Reservation";
 
 // import { useAuthState } from "react-firebase-hooks/auth";
@@ -27,43 +27,46 @@ firebase.initializeApp({
 // const firestore = firebase.firestore();
 
 const Company: React.FC = () => {
-  const [input, setInput] = useState(""); // '' is the initial state value
+  // const [input, setInput] = useState(""); // '' is the initial state value
   const [places, setPlaces] = useState<IRoom[]>([]);
-  const [desk, setDesk] = useState<IDesk[]>([]);
+  const [desk] = useState<IDesk[]>([]);
 
   (function () {
     /*eslint-disable */
     getAllPlaces().then(
-      (places) => {console.log(places); setPlaces(places)},
+      (places) => {
+        console.log(places);
+        setPlaces(places);
+      },
       (error) => console.log(error)
     );
     /*eslint-enable */
   })();
 
-  const docRef = firebase.firestore();
+  // const docRef = firebase.firestore();
   // docRef.collection("desk");
 
-  const submit = (e: any) => {
-    e.preventDefault();
-    console.log("Wysłane", input);
-    docRef.collection("desk").add({
-      created: firebase.firestore.FieldValue.serverTimestamp(),
-      user: [{ name: input }],
-    });
-  };
+  // const submit = (e: any) => {
+  //   e.preventDefault();
+  //   console.log("Wysłane", input);
+  //   docRef.collection("desk").add({
+  //     created: firebase.firestore.FieldValue.serverTimestamp(),
+  //     user: [{ name: input }],
+  //   });
+  // };
 
   return (
-    <div className="App">
-      <div>
+    <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+      {/* <div>
         <label>Biurko</label>
         <input
           value={input}
           onChange={(event) => setInput(event.target.value)}
         />
         <button onClick={submit}>Wyslij</button>
-      </div>
+      </div> */}
 
-      <Reservation desk={desk[0]} reservation={places[0]}/>
+      <Reservation desk={desk[0]} reservation={places[0]} />
 
       <Room room={places[0]} />
     </div>
