@@ -9,7 +9,7 @@ interface IReservation {
 const Room: React.FC<IReservation> = ({ id }) => {
   return (
     <div className={styles.rooms}>
-      <h1>Zarezerwuj</h1>
+      <h1 className="text-red">Zarezerwuj</h1>
     </div>
   );
 };

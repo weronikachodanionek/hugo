@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { AvailabilityType, IDesk, IRoom } from "../../API/types";
+import { Button } from "../common";
 
 import styles from "./Reservation.module.scss";
 import TimeTable from "./Timetable";
@@ -38,7 +39,7 @@ const Reservation: React.FC<IDeskProps> = ({ desk, reservation }) => {
       <>
         <h4>Nazwa biurk: {reservation?.desks[0]?.deskName}</h4>
         <div>
-          <h4>Kalendarz</h4>
+          <h4 className="text-red">Kalendarz</h4>
           {reservation?.desks[0]?.days?.map((day) => (
             <p>{day.date}</p>
           ))}
@@ -51,12 +52,14 @@ const Reservation: React.FC<IDeskProps> = ({ desk, reservation }) => {
             onChange={(e) => setInputDate(e.target.value)}
             placeholder="dodaj dzień"
           />
-          <button type="submit">Adodaj dizedv</button>
+          <Button type="submit" className={"btn-primary"}>
+            Dodaj dzień
+          </Button>
         </form>
 
         <ul>
           {date?.map((el, index) => (
-            <TimeTable completed={()=>handleBntClick} date={el} key={index} />
+            <TimeTable completed={() => handleBntClick} date={el} key={index} />
           ))}
         </ul>
       </>

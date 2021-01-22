@@ -1,0 +1,13 @@
+.btn {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.btn-main {
+  @include button-variant(
+    $btn-main-background,
+    $btn-main-border,
+    $btn-main-hover-background,
+    $btn-main-hover-border
+  );
+}

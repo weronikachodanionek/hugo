@@ -12,7 +12,8 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
   return (
     <div className={styles.rooms}>
       <div className={styles.room}>
-        <h3>{room?.roomName}</h3>
+      
+        <h4 className="text-uppercase">{room?.roomName}</h4>
 
         <div className={styles.desks}>
           {room?.desks.map((desk: IDesk) => (

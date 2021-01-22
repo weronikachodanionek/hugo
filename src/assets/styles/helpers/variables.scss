@@ -1,0 +1,24 @@
+$h4-font-size: 18px;
+
+$primary: #bf1682;
+$secondary: #36003a;
+$gray--light: #f5f5fa;
+$gray--dark: #292b2c;
+
+$theme-colors: (
+  primary: $primary,
+  secondary: $secondary,
+  gray: $gray--light
+);
+
+//buttons
+
+$btn-font-size: 14px;
+$btn-border-radius: 50px;
+$btn-padding-y: 8px;
+$btn-padding-x: 12px;
+
+$btn-main-background: $primary;
+$btn-main-border: $primary;
+$btn-main-hover-background: darken($primary, 10%);
+$btn-main-hover-border: darken($primary, 10%);

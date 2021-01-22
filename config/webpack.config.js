@@ -461,6 +461,33 @@ module.exports = function (webpackEnv) {
                 inputSourceMap: shouldUseSourceMap,
               },
             },
+            {
+              test: /\.(scss)$/,
+              use: [{
+                loader: 'style-loader', // inject CSS to page
+              }, {
+                loader: 'css-loader', // translates CSS into CommonJS modules
+              }, {
+                loader: 'postcss-loader', // Run post css actions
+                options: {
+                  plugins: function () { // post css plugins, can be exported to postcss.config.js
+                    return [
+                      require('precss'),
+                      require('autoprefixer')
+                    ];
+                  }
+                }
+              }, {
+                loader: 'sass-loader' // compiles Sass to CSS,
+                
+              },
+              {
+                loader: "sass-resources-loader",
+                options: {
+                  resources: path.resolve(__dirname, "../src/assets/styles/sass-resources.scss"),
+                },
+              },]
+            },
             // "postcss" loader applies autoprefixer to our CSS.
             // "css" loader resolves paths in CSS and adds assets as dependencies.
             // "style" loader turns CSS into JS modules that inject <style> tags.
@@ -510,7 +537,7 @@ module.exports = function (webpackEnv) {
                     ? shouldUseSourceMap
                     : isEnvDevelopment,
                 },
-                'sass-loader'
+                
               ),
               // Don't consider CSS imports dead code even if the
               // containing package claims to have no side effects.
@@ -532,7 +559,8 @@ module.exports = function (webpackEnv) {
                     getLocalIdent: getCSSModuleLocalIdent,
                   },
                 },
-                'sass-loader'
+                'sass-loader',
+               
               ),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
