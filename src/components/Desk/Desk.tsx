@@ -1,7 +1,10 @@
 import React from "react";
+import classnames from "classnames";
 import { AvailabilityType, IDesk } from "../../API/types";
 
 import styles from "./Desk.module.scss";
+import Point from "./Point";
+import { Button } from "../common";
 // import "./Desk.scss";
 
 interface IDeskProps {
@@ -9,31 +12,20 @@ interface IDeskProps {
 }
 
 const Desk: React.FC<IDeskProps> = ({ desk }) => {
-
   return (
-    <>
-      <div className={styles.desk}>
+      <div className={classnames(styles.desk, "w-100")}>
         <h3>{desk.deskName}</h3>
-        {desk.users.map((user) => (
-          <div key={user.id} className={styles.deskUSer}>
-            {user.userName}
-          </div>
-        ))}
 
-
-        <h3>Dostępność biurka</h3>
-        {desk.days.map((day) => (
-          <>
-            <div className={styles.deskUser}>Dzień: {day.date}</div>
-            <div className={styles.deskUser}>Dostępność: {day.description}</div>
-
-            {day.description === AvailabilityType.unavailable && (
-              <div className={styles.deskUser}>Kto: {day.user}</div>
-            )}
-          </>
-        ))}
+        {desk.available === AvailabilityType.available ? (
+          <Point className="bg-available">
+            <Button>Zarezerwuj</Button>
+          </Point>
+        ) : (
+          <Point className="bg-unavailable">
+            <div className={styles.pointUser}>{desk.user}</div>
+          </Point>
+        )}
       </div>
-    </>
   );
 };
 

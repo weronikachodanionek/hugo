@@ -1,15 +1,13 @@
 import React from "react";
 import "../src/assets/styles/index.scss";
-import Layout from "./Layout";
 
 import "../src/assets/svg-icon/fonticon.font";
-
-
+import Company from "./Company";
 
 const App: React.FC = () => {
   return (
     <>
-      <Layout />
+      <Company />
     </>
   );
 };

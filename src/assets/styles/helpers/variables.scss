@@ -1,14 +1,20 @@
 $h4-font-size: 18px;
+$h3-font-size: 20px;
+
 
 $primary: #bf1682;
 $secondary: #36003a;
 $gray--light: #f5f5fa;
 $gray--dark: #292b2c;
+$green: rgb(199, 240, 50);
+$red: rgba(255, 0, 0, 0.863);
 
 $theme-colors: (
   primary: $primary,
   secondary: $secondary,
-  gray: $gray--light
+  gray: $gray--light,
+  available: $green,
+  unavailable: $red,
 );
 
 //buttons
