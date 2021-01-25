@@ -12,8 +12,8 @@ export interface IRoomProps {
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
   return (
-    <div className={classnames(styles.rooms, "d-flex justify-content-center col-8")}>
-      <div className="row w-100" style={{border: "2px solid blue"}}>
+    <div className={classnames(styles.rooms, "d-flex justify-content-center col-6")}>
+      <div className="row w-100 justify-content-center align-content-center">
       
         <h4 className="text-uppercase text-primary mb-5 mt-5">{room?.roomName}</h4>
 

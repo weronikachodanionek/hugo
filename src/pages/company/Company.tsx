@@ -56,7 +56,7 @@ const Company: React.FC = () => {
   // };
 
   return (
-    <div className="w-100 d-flex flex-column justify-content-center align-items-center">
+    <div className="w-100 d-flex flex-column justify-content-start align-items-start">
       {/* <div>
         <label>Biurko</label>
         <input
@@ -65,8 +65,13 @@ const Company: React.FC = () => {
         />
         <button onClick={submit}>Wyslij</button>
       </div> */}
-
-      <Reservation desk={desk[0]} reservation={places[0]} />
+      {/* 
+   <div className="d-flex justify-content-center">
+   <Reservation desk={desk[0]} reservation={places[0]} />
+   </div> */}
+      <>
+        <span className="si si-group" /> IKONKA
+      </>
 
       <Room room={places[0]} />
     </div>

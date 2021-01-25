@@ -6,7 +6,7 @@ import { Company } from "./pages";
 
 const Layout: React.FC = () => {
   return (
-    <div className={classnames(styles.layout, "bg-gray d-flex justify-content-center align-items-center justify-center align-")}>      
+    <div className={classnames(styles.layout, "bg-gray d-flex justify-content-center align-items-start")}>      
       <Company />
     </div>
   );

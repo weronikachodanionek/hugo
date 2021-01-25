@@ -20,6 +20,7 @@ const Desk: React.FC<IDeskProps> = ({ desk }) => {
           </div>
         ))}
 
+
         <h3>Dostępność biurka</h3>
         {desk.days.map((day) => (
           <>
@@ -27,7 +28,7 @@ const Desk: React.FC<IDeskProps> = ({ desk }) => {
             <div className={styles.deskUser}>Dostępność: {day.description}</div>
 
             {day.description === AvailabilityType.unavailable && (
-              <div className={styles.deskUser}>Kot: {day.user}</div>
+              <div className={styles.deskUser}>Kto: {day.user}</div>
             )}
           </>
         ))}
