@@ -37,6 +37,7 @@ const InputSelect: React.FC<ISelectInputProps> = ({
           className="react-select-container"
           {...props}
         />
+
       </div>
     </>
   );

@@ -1,10 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import SimpleReactCalendar from "simple-react-calendar";
 import "./Reservation.scss";
-import { desksOptions, ISelectOptions, roomsOptions } from "./Options";
+import { ISelectOptions, roomsData } from "./Options";
 import InputSelect from "../common/Inputs/InputSelect";
-import { useReservationActionsContext } from "../../Context/ReservationContext";
+import {
+  useReservationActionsContext,
+  useReservationContext,
+} from "../../Context/ReservationContext";
+import { IDesk, IRoom } from "../../API/types";
 
 export interface IModalReservation {
   //showModal: () => void;
@@ -12,7 +16,27 @@ export interface IModalReservation {
 
 const Reservation: React.FC<IModalReservation> = () => {
   const [showModal, setShowModal] = useState<Boolean>(false);
-  const { setRoom } = useReservationActionsContext();
+  const { setRoom, setDay } = useReservationActionsContext();
+  const { room } = useReservationContext();
+
+  const roomsOptions: ISelectOptions[] = roomsData.map((room: IRoom) => ({
+    label: room.roomName,
+    value: room.id,
+  }));
+
+  const [desks, setDesks] = useState<ISelectOptions[]>([]);
+
+  useEffect(() => {
+    const roomData: IRoom | undefined = roomsData.find(
+      (data: IRoom) => data.id === room
+    );
+    setDesks(
+      roomData?.desks.map((desk: IDesk) => ({
+        label: desk.deskName,
+        value: desk.id,
+      })) ?? []
+    );
+  }, [room]);
 
   return (
     <div>
@@ -29,24 +53,22 @@ const Reservation: React.FC<IModalReservation> = () => {
                 label="Wybierz pokój, który chcesz zarezerwować"
                 options={roomsOptions}
                 placeholder="Wybierz pokój"
-                onChange={(value: ISelectOptions ) =>
-                  setRoom(value.label)
-                }
+                onChange={(option: ISelectOptions) => setRoom(option.value)}
               />
 
               <InputSelect
-                inputId="DeskId"
-                label="Wybierz biurko, które chcesz zarezerwować"
-                options={desksOptions}
-                placeholder="Wybierz biurko"
+                inputId="RoomId"
+                label="Wybierz pokój, który chcesz zarezerwować"
+                options={desks}
+                placeholder="Wybierz pokój"
+                onChange={(option: ISelectOptions) => setRoom(option.value)}
               />
 
               <div className="input-label">Wybierz datę</div>
 
               <SimpleReactCalendar
-                onSelect={(start: any, end: any) => {
-                  /* eslint-disable no-console */
-                  console.log("click: ", { end, start });
+                onSelect={(start: Date) => {
+                  setDay(start.getUTCDate());
                 }}
                 activeMonth={new Date()}
               />

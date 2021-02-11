@@ -22,7 +22,7 @@ export interface IDesk {
   id: string;
   deskName: string;
   user?: string;
-  available: string;
+  available?: string;
 }
 
 // export interface IRoom {
