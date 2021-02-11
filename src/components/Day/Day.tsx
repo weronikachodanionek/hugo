@@ -1,6 +1,5 @@
 import React from "react";
 
-import styles from "./Day.module.scss";
 import { IDay, IRoom } from "../../API/types";
 import Room from "../Room/Room";
 // import "./Desk.scss";
@@ -11,7 +10,7 @@ interface IDayProps {
 
 const Day: React.FC<IDayProps> = ({ day }) => {
   return (
-    <div className="w-100 d-flex flex-column">
+    <div className="w-100 d-flex flex-column justify-content-center align-items-center">
       <h2>{day?.dayName}</h2>
 
       <div className="row">

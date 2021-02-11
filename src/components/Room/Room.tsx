@@ -5,19 +5,19 @@ import { Desk } from "..";
 
 import { IDesk, IRoom } from "../../API/types";
 import styles from "./Room.module.scss";
+import { useReservationContext } from "../../Context/ReservationContext";
 
 export interface IRoomProps {
   room: IRoom;
 }
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
+  const { room: roomFromContext } = useReservationContext();
+
   return (
-    <div
-      className={classnames(
-        styles.rooms,
-        "d-flex justify-content-center"
-      )}
-    >
+    <div className={classnames(styles.rooms, "d-flex justify-content-center")}>
+      <p>{roomFromContext}</p>
+
       <div className="row w-100 justify-content-center align-content-center">
         <h4 className="text-uppercase text-primary mb-5 mt-5">
           {room?.roomName}

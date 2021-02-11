@@ -22,11 +22,6 @@ function mapPlacesToCompany(days: IDay[]): IDay[] {
 }
 
 async function getAllWorkplaces(): Promise<IDay[]> {
-  // Potrzebna jest liczba wszystkich tripów do infinite scrolla
-  // - powinna ta wartosc przychodzic z backendu
-  // Metoda dodana tymczasowo, zeby nie korzystac z getUpcomingTrips,
-  // ktora mimo ze zwraca te sama wartosc, nie sluzy do tego samego
-
   const workplace = await getAllPlaces();
   return mapPlacesToCompany(workplace);
 }

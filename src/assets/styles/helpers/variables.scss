@@ -5,9 +5,11 @@ $h3-font-size: 20px;
 $primary: #bf1682;
 $secondary: #36003a;
 $gray--light: #f5f5fa;
+$gray--silver: #e6e3e7;
 $gray--dark: #292b2c;
 $green: rgb(199, 240, 50);
 $red: rgba(255, 0, 0, 0.863);
+$white: white;
 
 $theme-colors: (
   primary: $primary,
@@ -28,3 +30,19 @@ $btn-main-background: $primary;
 $btn-main-border: $primary;
 $btn-main-hover-background: darken($primary, 10%);
 $btn-main-hover-border: darken($primary, 10%);
+
+
+$input-bg: $white;
+$input-color: $secondary;
+$form-group-margin-bottom: 0;
+$input-font-size: 14px;
+$input-placeholder-color: rgba(21, 21, 21, 0.5);
+$input-border-color: $secondary;
+$input-border-width: 1px;
+$input-focus-box-shadow: none;
+$input-focus-color: $secondary;
+$label-letter-spacing: 0.08em;
+$input-height: 45px;
+$input-border-radius: 5px;
+$input-padding-x: 0.875rem;
+$input-padding-y: 0.375rem;

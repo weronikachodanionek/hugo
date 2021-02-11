@@ -4,7 +4,7 @@ export const Days: IDay[] = [
   {
     id: "1",
     dayName: "Środa",
-    date: "20.01.2021",
+    date: "2020-07-10",
     rooms: [
       {
         id: "1",

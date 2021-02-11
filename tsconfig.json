@@ -15,7 +15,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "useDefineForClassFields": true
   },
   "include": ["src/**/*", "@types/**/*.d.ts"],
 }

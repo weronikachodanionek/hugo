@@ -1,0 +1,126 @@
+@mixin centralize {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reservation-modal {
+  width: 40vw;
+  padding: 20px 0;
+  min-height: 50vh;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reservation-screen {
+  width: 100vw;
+  height: 100vh;
+  background-color: darken($gray--light, 10%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.calendar {
+  padding: 40px 20px;
+  margin-top: 5px;
+  margin-bottom: 40px;
+  background-color: $primary;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.25), 0px 0px 2px rgba(0, 0, 0, 0.125);
+  box-sizing: border-box !important;
+}
+
+.calendar-month_header {
+  @include centralize;
+}
+
+.calendar-month_header_title {
+  color: #fff;
+  margin: 0 20px;
+}
+
+.calendar-header_button {
+  border: 1px solid #fff;
+  background-color: $primary;
+  color: #fff;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  @include centralize;
+
+  &.is-prev:before {
+    content: "<";
+  }
+
+  &.is-next:after {
+    content: ">";
+  }
+}
+
+.calendar-days_of_week {
+  @include centralize;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 300;
+  opacity: 0.6;
+  margin: 30px 0;
+  color: #fff;
+}
+
+.calendar-days_of_week_day {
+  flex: 1;
+  text-align: center;
+
+  &.is-weekend {
+    color: $secondary;
+  }
+}
+
+.calendar-month {
+  margin-top: 20px;
+}
+
+.calendar-week {
+  display: flex;
+  justify-content: space-between;
+}
+
+.calendar-week-day {
+  border: none;
+  background-color: $primary;
+  flex: 1;
+  padding: 0;
+  margin: 10px;
+  width: 30px;
+  height: 30px;
+  color: #fff;
+  font-weight: 300;
+
+  &:hover {
+    border: 1px dashed rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+  }
+
+  &.is-today {
+    border: 1px solid #fff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+  }
+
+  &.is-next_month,
+  &.is-prev_month {
+    opacity: 0.6;
+  }
+
+  &.is-weekend {
+    color: $secondary;
+
+    &:hover {
+      border: 1px dashed $secondary;
+      border-radius: 50%;
+    }
+  }
+}
