@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import "../src/assets/styles/index.scss";
+import React from "react";
 
 import Company from "./Company";
-import Reservation from "./components/Reservation/Reservation";
 import useLocalStorage from "./Hooks/useLocalStorage";
 //import { observer } from "mobx-react";
 
 import styles from "./App.scss";
+import "../src/assets/styles/index.scss";
 import { ReservationContextProvider } from "./Context/ReservationContext";
+import { Header, Reservation } from "./components";
 
 //@observer
 const App: React.FC = () => {
@@ -19,9 +19,11 @@ const App: React.FC = () => {
   return (
     <ReservationContextProvider>
       <div className={styles.app}>
-        <h1>Witaj, {name}</h1>
+        <Header />
+        <Reservation/>
+
         {/* <Reservation showModal={() => setShowModal(true)} /> */}
-        <Reservation />
+       
         {/* <div>
         <input
           type="text"

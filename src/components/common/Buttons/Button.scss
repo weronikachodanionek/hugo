@@ -1,6 +1,11 @@
 .btn {
   text-transform: uppercase;
   letter-spacing: 0.08em;
+  box-shadow: none;
+  outline: 0;
+  outline-color: transparent;
+  outline-width: 0;
+  outline-style: none;
 }
 
 .btn-main {
@@ -9,5 +14,14 @@
     $btn-main-border,
     $btn-main-hover-background,
     $btn-main-hover-border
+  );
+}
+
+.btn-pink {
+  @include button-variant(
+    $btn-pink-background,
+    $btn-pink-border,
+    $btn-pink-hover-background,
+    $btn-pink-hover-border
   );
 }

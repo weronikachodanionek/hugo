@@ -1,10 +1,10 @@
 $h4-font-size: 18px;
 $h3-font-size: 20px;
 
-
 $primary: #bf1682;
 $secondary: #36003a;
 $gray--light: #f5f5fa;
+$gray--blue: #ebebf5;
 $gray--silver: #e6e3e7;
 $gray--dark: #292b2c;
 $green: rgb(199, 240, 50);
@@ -15,6 +15,7 @@ $theme-colors: (
   primary: $primary,
   secondary: $secondary,
   gray: $gray--light,
+  silver: $gray--blue,
   available: $green,
   unavailable: $red,
 );
@@ -31,6 +32,13 @@ $btn-main-border: $primary;
 $btn-main-hover-background: darken($primary, 10%);
 $btn-main-hover-border: darken($primary, 10%);
 
+$btn-pink-background: $primary;
+$btn-pink-border: $primary;
+$btn-pink-hover-background: darken($primary, 10%);
+$btn-pink-hover-border: darken($primary, 10%);
+
+
+//inputs
 
 $input-bg: $white;
 $input-color: $secondary;

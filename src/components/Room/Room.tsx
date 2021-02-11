@@ -12,12 +12,13 @@ export interface IRoomProps {
 }
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
-  const { room: roomFromContext, day } = useReservationContext();
+  const { room: roomFromContext, desk, day } = useReservationContext();
 
   return (
     <div className={classnames(styles.rooms, "d-flex justify-content-center")}>
       <p>{roomFromContext}</p>
       <p>{day}</p>
+      <p>{desk}</p>
 
       <div className="row w-100 justify-content-center align-content-center">
         <h4 className="text-uppercase text-primary mb-5 mt-5">

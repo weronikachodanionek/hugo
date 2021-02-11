@@ -40,9 +40,13 @@ const Reservation: React.FC<IModalReservation> = () => {
 
   return (
     <div>
-      <button className="btn btn-main" onClick={() => setShowModal(true)}>
-        Zarezerwuj biurko
-      </button>
+      <div className="bg-gray d-flex justify-content-center align-content-center">
+        {showModal === false && (
+          <button className="btn btn-pink" onClick={() => setShowModal(true)}>
+            Zarezerwuj biurko
+          </button>
+        )}
+      </div>
 
       {showModal === true && (
         <div className="reservation-screen">
@@ -70,12 +74,25 @@ const Reservation: React.FC<IModalReservation> = () => {
                 onSelect={(start: Date) => {
                   setDay(start.getUTCDate());
                 }}
+                headerPrevArrow={
+                  <i className="calendar-header_button bi bi-arrow-left-short"></i>
+                }
+                headerNextArrow={
+                  <i className="calendar-header_button bi bi-arrow-right-short"></i>
+                }
                 activeMonth={new Date()}
               />
 
               <div className="w-100 d-flex justify-content-center align-content-center">
                 <button type="submit" className="btn btn-main">
                   Zarezerwuj
+                </button>
+
+                <button
+                  className="btn btn-pink"
+                  onClick={() => setShowModal(false)}
+                >
+                  Zamknij
                 </button>
               </div>
             </form>

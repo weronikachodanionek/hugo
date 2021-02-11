@@ -1,6 +1,7 @@
 import React from "react";
 
-import Select from "react-select";
+import Select, { components, IndicatorProps } from "react-select";
+
 import { SelectComponentsProps } from "react-select/src/Select";
 
 import { ISelectOptions } from "../../Reservation/Options";
@@ -13,6 +14,17 @@ export interface ISelectInputProps extends SelectComponentsProps {
   placeholder: string;
   inputId: string;
 }
+
+
+const DropdownIndicator = (props: any): JSX.Element => {
+  return (
+    <components.DropdownIndicator {...props}>
+      <i className="bi bi-chevron-compact-down input-icon-arrow"></i>
+    </components.DropdownIndicator>
+  );
+};
+
+
 
 const InputSelect: React.FC<ISelectInputProps> = ({
   label,
@@ -35,6 +47,7 @@ const InputSelect: React.FC<ISelectInputProps> = ({
           inputId={inputId}
           classNamePrefix="react-select-custom"
           className="react-select-container"
+          components={{ DropdownIndicator }}
           {...props}
         />
 

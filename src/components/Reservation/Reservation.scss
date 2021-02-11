@@ -17,7 +17,7 @@
 .reservation-screen {
   width: 100vw;
   height: 100vh;
-  background-color: darken($gray--light, 10%);
+  background-color: $gray--blue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -42,22 +42,30 @@
 }
 
 .calendar-header_button {
-  border: 1px solid #fff;
   background-color: $primary;
   color: #fff;
-  border-radius: 50%;
-  width: 26px;
+  border: 1px solid white;
   height: 26px;
+  width: 26px;
+  border-radius: 50%;
   @include centralize;
-
-  &.is-prev:before {
-    content: "<";
+  outline: none;
+  font-size: 26px;
+  font-weight: 300;
+  
+  &:hover{
+    color: rgba(255, 255, 255, 0.7);
   }
 
-  &.is-next:after {
-    content: ">";
-  }
+  // &.is-prev:before {
+  //   content: "<";
+  // }
+
+  // &.is-next:after {
+  //   content: ">";
+  // }
 }
+
 
 .calendar-days_of_week {
   @include centralize;
