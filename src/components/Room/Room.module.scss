@@ -1,13 +1,29 @@
-.rooms {
-  box-sizing: border-box;
-  background-color: darken($gray--light, 3%);
-}
-
 .room {
   box-sizing: border-box;
+  background-image: url("../../assets/images/roomBg.jpg");
+  background-size: cover;
+  min-height: 50vh;
+  position: relative;
 }
 
+.desk {
+  border: 1px solid red;
+  position: absolute;
+}
 
-.deskEl {
-  flex: 1;
+.deskIcon {
+  font-size: 46px;
+}
+
+.deskName{
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.unavailableTooltip{
+  background-color: white;
+  font-size: 13px;
+  font-weight: 300;
+  white-space: nowrap;
+  padding: 5px;
 }

@@ -25,10 +25,12 @@ const Company: React.FC = () => {
     <div
       className={classnames(
         styles.company,
-        "bg-gray d-flex justify-content-center align-items-start"
+        "row bg-gray d-flex justify-content-center align-items-start"
       )}
     >
-      <Day day={day[0]} />
+      <div className="col-10">
+        <Day day={day[0]} />
+      </div>
     </div>
   );
 };

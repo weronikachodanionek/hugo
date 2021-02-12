@@ -10,15 +10,18 @@ interface IDayProps {
 
 const Day: React.FC<IDayProps> = ({ day }) => {
   return (
-    <div className="w-100 d-flex flex-column justify-content-center align-items-center">
-      <h2>{day?.dayName}</h2>
+    <div className="row d-flex flex-column justify-content-center align-items-center">
+      <h2 className="col-12 text-center">{day?.dayName}</h2>
 
-      <div className="row">
-        {day?.rooms?.map((room: IRoom) => (
-          <div className="col-6">
-            <Room room={room} />
-          </div>
-        ))}
+      <div className="col-12">
+        <div className="row">
+          {day?.rooms?.map((room: IRoom) => (
+            <div className="col-6">
+              <h4 className="mb-3 text-center">{room.roomName}</h4>
+              <Room room={room} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
