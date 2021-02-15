@@ -8,12 +8,21 @@
   outline-style: none;
 }
 
-.btn-main {
+.btn-violet {
   @include button-variant(
-    $btn-main-background,
-    $btn-main-border,
-    $btn-main-hover-background,
-    $btn-main-hover-border
+    $btn-violet-background,
+    $btn-violet-border,
+    $btn-violet-hover-background,
+    $btn-violet-hover-border,
+  );
+}
+
+.btn-orange {  
+  @include button-variant(
+    $btn-orange-background,
+    $btn-orange-border,
+    $btn-orange-hover-background,
+    $btn-orange-hover-border,
   );
 }
 

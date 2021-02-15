@@ -3,26 +3,25 @@
   background-image: url("../../assets/images/roomBg.jpg");
   background-size: cover;
   min-height: 50vh;
-  position: relative;
-}
+  opacity: 0.9;
 
-.desk {
-  border: 1px solid red;
-  position: absolute;
+  &:hover{
+    opacity: 1;
+  }
 }
 
 .deskIcon {
   font-size: 46px;
 }
 
-.deskName{
+.deskName {
   font-weight: 300;
   font-size: 18px;
 }
 
-.unavailableTooltip{
-  background-color: white;
-  font-size: 13px;
+.tooltip {
+  background-color: $white;
+  font-size: 12px;
   font-weight: 300;
   white-space: nowrap;
   padding: 5px;

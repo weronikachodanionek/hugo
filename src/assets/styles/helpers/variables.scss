@@ -10,6 +10,7 @@ $gray--dark: #292b2c;
 $green: rgb(199, 240, 50);
 $red: rgba(255, 0, 0, 0.863);
 $white: white;
+$orange: #FF9640;
 
 $theme-colors: (
   primary: $primary,
@@ -18,24 +19,30 @@ $theme-colors: (
   silver: $gray--blue,
   available: $green,
   unavailable: $red,
+  white: $white,
 );
 
 //buttons
 
-$btn-font-size: 14px;
+$btn-font-size: 13px;
 $btn-border-radius: 50px;
 $btn-padding-y: 8px;
 $btn-padding-x: 12px;
 
-$btn-main-background: $primary;
-$btn-main-border: $primary;
-$btn-main-hover-background: darken($primary, 10%);
-$btn-main-hover-border: darken($primary, 10%);
+$btn-violet-background: $secondary;
+$btn-violet-border: $secondary;
+$btn-violet-hover-background: lighten($secondary, 5%);
+$btn-violet-hover-border: lighten($secondary, 5%);
+
+$btn-orange-background: $orange;
+$btn-orange-border: $orange;
+$btn-orange-hover-background: darken($orange, 10%);
+$btn-orange-hover-border: darken($orange, 10%);
 
 $btn-pink-background: $primary;
 $btn-pink-border: $primary;
-$btn-pink-hover-background: darken($primary, 10%);
-$btn-pink-hover-border: darken($primary, 10%);
+$btn-pink-hover-background: darken($primary, 5%);
+$btn-pink-hover-border: darken($primary, 5%);
 
 
 //inputs

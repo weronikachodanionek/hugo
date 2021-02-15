@@ -26,11 +26,14 @@ const Calender: React.FC = () => {
   return (
     <div
       className={
-        "calender row bg-gray d-flex justify-content-center align-items-start"
+        "calender bg-gray d-flex justify-content-center align-items-start"
       }
     >
       <div className="col-10">
-        <Tabs selectedIndex={tabIndex} onSelect={(index: number) => setTabIndex(index)}>
+        <Tabs
+          selectedIndex={tabIndex}
+          onSelect={(index: number) => setTabIndex(index)}
+        >
           <TabList>
             {days.map((day: IDay) => (
               <Tab>{day.dayName}</Tab>

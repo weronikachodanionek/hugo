@@ -21,7 +21,7 @@ const Point: React.FC<IPointProps> = ({ className, children, ...props }) => {
         className={classnames(
           styles.point,
           className,
-          "bi bi-brightness-high"
+          "bi bi-circle-fill"
         )}
         {...props}
       ></i>

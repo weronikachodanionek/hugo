@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import classnames from "classnames";
 
 import styles from "./UserInformations.module.scss";
-import { Reservation } from "..";
 
 const UserInformation: React.FC = () => {
   const [showUserPanel, setUserPanelShow] = useState<Boolean>(false);
@@ -26,9 +25,7 @@ const UserInformation: React.FC = () => {
             />
             <h4 className="ml-5">Imię i Nazwisko</h4>
           </div>
-
-            {/* <Reservation /> */}
-          </div>
+        </div>
       )}
     </>
   );

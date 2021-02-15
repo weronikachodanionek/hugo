@@ -1,5 +1,7 @@
 .calender {
- padding-bottom: 80px;
+  padding-bottom: 80px;
+  box-sizing: border-box;
+  overflow-y: hidden;
 }
 
 .tabDayName {
@@ -23,6 +25,9 @@
   font-weight: 300;
   border: 0;
   padding: 0 20px;
+  border: none;
+  border-radius: 0;
+  outline: none;
 }
 
 .react-tabs__tab--selected {
@@ -30,5 +35,4 @@
   color: $primary;
   background-color: transparent;
   font-weight: 400;
-
 }

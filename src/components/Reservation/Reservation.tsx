@@ -38,8 +38,8 @@ const Reservation: React.FC = () => {
   }, [room]);
 
   return (
-    <div>
-      <div className="bg-gray d-flex justify-content-center align-content-center">
+    <div className="bg-gray pt-5 pb-5">
+      <div className="d-flex justify-content-center align-content-center">
         {isOpenReservation === false && (
           <button
             className="btn btn-pink"
@@ -51,8 +51,12 @@ const Reservation: React.FC = () => {
       </div>
 
       <Collapse isOpened={isOpenReservation}>
-        <div className="reservation-screen">
-          <div className="reservation-modal">
+        <div className="reservation-screen bg-silver d-flex justify-content-center align-items-center">
+          <div className="reservation-modal bg-white d-flex justify-content-center align-items-center flex-column">
+            <i
+              className="bi bi-x reservation-close d-flex justify-content-end"
+              onClick={() => setOpenReservation(!isOpenReservation)}
+            ></i>
             <form>
               <InputSelect
                 inputId="RoomId"
@@ -86,20 +90,14 @@ const Reservation: React.FC = () => {
               />
 
               <div className="w-100 d-flex justify-content-center align-content-center">
-                <button
-                  //type="submit"
-                  className="btn btn-main"
-                  onClick={() => setOpenReservation(false)}
-                >
-                  Zarezerwuj
-                </button>
-
-                <button
-                  className="btn btn-pink"
-                  onClick={() => setOpenReservation(false)}
-                >
-                  Anuluj
-                </button>
+                {isOpenReservation === true && (
+                  <button
+                    className="btn btn-violet"
+                    onClick={() => setOpenReservation(false)}
+                  >
+                    Zarezerwuj biurko
+                  </button>
+                )}
               </div>
             </form>
           </div>

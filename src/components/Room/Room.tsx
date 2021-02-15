@@ -5,7 +5,6 @@ import { AvailabilityType, IDesk, IRoom } from "../../API/types";
 import styles from "./Room.module.scss";
 import { useReservationContext } from "../../Context/ReservationContext";
 import Point from "../Point/Point";
-import { Button } from "../common";
 
 export interface IRoomProps {
   room: IRoom;
@@ -20,10 +19,9 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
       <p>{day}</p>
       <p>{desk}</p>
 
-      
       <div
         className={classnames(
-          "d-flex flex-column justify-content-around align-items-center py-5",
+          "gray-shadow position-relative d-flex flex-column justify-content-around align-items-center py-5",
           styles.room
         )}
       >
@@ -43,57 +41,22 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
 
             {desk.available === AvailabilityType.available ? (
               <Point className="icon-available">
-                <Button className="btn-pink">Zarezerwuj</Button>
+                <div className={classnames("text-center", styles.tooltip)}>
+                  <span className="font-weight-normal text-primary text-uppercase">
+                    Zarezerwuj
+                  </span>
+                </div>
               </Point>
             ) : (
               <Point className="icon-unavailable">
-                <div
-                  className={classnames(
-                    "text-center",
-                    styles.unavailableTooltip
-                  )}
-                >
-                  Zajęte przez:
-                  <span className="font-weight-normal">{desk.user}</span>
+                <div className={classnames("text-center", styles.tooltip)}>
+                  <i className="bi bi-person-check"></i>
+                  <span className="ml-2 font-weight-normal">{desk.user}</span>
                 </div>
               </Point>
             )}
           </div>
         ))}
-
-        {/*
-      <div
-        className={classnames(
-          styles.rooms,
-          "row d-flex justify-content-center"
-        )} style={{border: "1px solid red"}}
-      >
-        <p>{roomFromContext}</p>
-        <p>{day}</p>
-        <p>{desk}</p>
-
-       <div className="col-12">
-       {room?.desks.map((desk: IDesk) => (
-          <div
-            key={desk.id}
-            className={classnames(
-              "d-flex justify-content-center align-items-center",
-              styles.desk
-            )}
-          >
-            <i className={classnames("bi bi-laptop text-white", styles.deskIcon)}></i> 
-          </div>
-        ))}
-       </div>
-
-        <div className="row">
-          {room?.desks.map((desk: IDesk) => (
-            <div key={desk.id} className={classnames("col-6")}>
-
-            </div>
-          ))}
-        </div>
-      </div> */}
       </div>
     </>
   );
