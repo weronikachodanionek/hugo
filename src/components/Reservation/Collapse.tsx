@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import classnames from "classnames";
 import SimpleReactCalendar from "simple-react-calendar";
-import { Collapse } from "react-collapse";
+import {Collapse} from 'react-collapse';
 
 import "./Reservation.scss";
 import { ISelectOptions, roomsData } from "./Options";
@@ -13,8 +13,7 @@ import {
 import { IDesk, IRoom } from "../../API/types";
 
 const Reservation: React.FC = () => {
-  const [isOpenReservation, setOpenReservation] = useState<any>(false);
-
+  const [showModal, setShowModal] = useState<Boolean>(false);
   const { setRoom, setDay } = useReservationActionsContext();
   const { room } = useReservationContext();
 
@@ -40,17 +39,14 @@ const Reservation: React.FC = () => {
   return (
     <div>
       <div className="bg-gray d-flex justify-content-center align-content-center">
-        {isOpenReservation === false && (
-          <button
-            className="btn btn-pink"
-            onClick={() => setOpenReservation(!isOpenReservation)}
-          >
+        {showModal === false && (
+          <button className="btn btn-pink" onClick={() => setShowModal(true)}>
             Zarezerwuj biurko
           </button>
         )}
       </div>
 
-      <Collapse isOpened={isOpenReservation}>
+      {showModal === true && (
         <div className="reservation-screen">
           <div className="reservation-modal">
             <form>
@@ -86,25 +82,21 @@ const Reservation: React.FC = () => {
               />
 
               <div className="w-100 d-flex justify-content-center align-content-center">
-                <button
-                  //type="submit"
-                  className="btn btn-main"
-                  onClick={() => setOpenReservation(false)}
-                >
+                <button type="submit" className="btn btn-main">
                   Zarezerwuj
                 </button>
 
                 <button
                   className="btn btn-pink"
-                  onClick={() => setOpenReservation(false)}
+                  onClick={() => setShowModal(false)}
                 >
-                  Anuluj
+                  Zamknij
                 </button>
               </div>
             </form>
           </div>
         </div>
-      </Collapse>
+      )}
     </div>
   );
 };

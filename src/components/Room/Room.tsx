@@ -15,44 +15,53 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
   const { room: roomFromContext, desk, day } = useReservationContext();
 
   return (
-    <div
-      className={classnames(
-        "d-flex flex-column justify-content-around align-items-center py-5",
-        styles.room
-      )}
-    >
-      {room?.desks.map((desk: IDesk) => (
-        <div
-          key={desk.id}
-          className={classnames(
-            "d-flex w-50 justify-content-md-center justify-content-lg-between flex-lg-row flex-sm-column flex-md-column align-items-center"
-          )}
-        >
-          <i
-            className={classnames(styles.deskIcon, "bi bi-laptop text-white")}
-          ></i>
-          <p className={classnames(styles.deskName, "text-white mb-0")}>
-            {desk.deskName}
-          </p>
+    <>
+      <p>{roomFromContext}</p>
+      <p>{day}</p>
+      <p>{desk}</p>
 
-          {desk.available === AvailabilityType.available ? (
-            <Point className="icon-available">
-              <Button>Zarezerwuj</Button>
-            </Point>
-          ) : (
-            <Point className="icon-unavailable">
-              <div
-                className={classnames("text-center", styles.unavailableTooltip)}
-              >
-                Zajęte przez:
-                <span className="font-weight-normal">{desk.user}</span>
-              </div>
-            </Point>
-          )}
-        </div>
-      ))}
+      
+      <div
+        className={classnames(
+          "d-flex flex-column justify-content-around align-items-center py-5",
+          styles.room
+        )}
+      >
+        {room?.desks.map((desk: IDesk) => (
+          <div
+            key={desk.id}
+            className={classnames(
+              "d-flex w-50 justify-content-md-center justify-content-lg-between flex-lg-row flex-sm-column flex-md-column align-items-center"
+            )}
+          >
+            <i
+              className={classnames(styles.deskIcon, "bi bi-laptop text-white")}
+            ></i>
+            <p className={classnames(styles.deskName, "text-white mb-0")}>
+              {desk.deskName}
+            </p>
 
-      {/*
+            {desk.available === AvailabilityType.available ? (
+              <Point className="icon-available">
+                <Button className="btn-pink">Zarezerwuj</Button>
+              </Point>
+            ) : (
+              <Point className="icon-unavailable">
+                <div
+                  className={classnames(
+                    "text-center",
+                    styles.unavailableTooltip
+                  )}
+                >
+                  Zajęte przez:
+                  <span className="font-weight-normal">{desk.user}</span>
+                </div>
+              </Point>
+            )}
+          </div>
+        ))}
+
+        {/*
       <div
         className={classnames(
           styles.rooms,
@@ -85,7 +94,8 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
           ))}
         </div>
       </div> */}
-    </div>
+      </div>
+    </>
   );
 };
 
