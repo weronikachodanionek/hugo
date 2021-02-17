@@ -5,7 +5,7 @@ export enum AvailabilityType {
 
 export interface IDay {
   id: string;
-  dayName: string;
+  dayName: any;
   // date: Date;
   //moment js
   date: string;

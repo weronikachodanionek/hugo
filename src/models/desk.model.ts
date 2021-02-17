@@ -1,3 +1,4 @@
-export interface IDeskk{
-    number: number;
-}
+
+export interface IParams {
+    roomName: string;
+  }

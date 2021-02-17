@@ -1,28 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import "react-tabs/style/react-tabs.scss";
-import "./Calender.scss";
+import "./Days.scss";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { IDay } from "../../API/types";
 import { getAllPlaces } from "../../API/fakeAPI";
 import Day from "../Day/Day";
 import { roomsData } from "../Reservation/Options";
+import { useDataContext } from "../../Context/DataContext";
 
-const Calender: React.FC = () => {
-  const [days, setDays] = useState<IDay[]>([]);
+const Days: React.FC = () => {
+  const [days, setDays] = useState<IDay[]>([] as IDay[]);
   const [tabIndex, setTabIndex] = useState(0);
 
-  (function () {
-    /*eslint-disable */
-    getAllPlaces().then(
-      (day) => {
-        console.log(day);
-        setDays(day);
-      },
-      (error) => console.log(error)
-    );
-    /*eslint-enable */
-  })();
+  // (function () {
+  //   /*eslint-disable */
+  //   getAllPlaces().then(
+  //     (days) => {
+  //       console.log("yyy", days);
+  //       // setDays(days);
+  //     },
+  //     (error) => console.log(error)
+  //   );
+  //   /*eslint-enable */
+  // })();
+
+  const { data } = useDataContext();
 
   return (
     <div
@@ -36,14 +39,14 @@ const Calender: React.FC = () => {
           onSelect={(index: number) => setTabIndex(index)}
         >
           <TabList>
-            {days.map((day: IDay) => (
+            {data.map((day: IDay) => (
               <Tab>{day.dayName}</Tab>
             ))}
           </TabList>
 
-          {days.map((day: IDay) => (
+          {data.map((day: IDay) => (
             <TabPanel>
-              <Day rooms={roomsData} />
+              <Day data={day} />
             </TabPanel>
           ))}
         </Tabs>
@@ -52,4 +55,4 @@ const Calender: React.FC = () => {
   );
 };
 
-export default Calender;
+export default Days;

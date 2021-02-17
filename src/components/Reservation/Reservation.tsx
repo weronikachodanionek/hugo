@@ -38,6 +38,7 @@ const Reservation: React.FC = () => {
     );
   }, [room]);
 
+
   return (
     <div className="bg-gray pt-5 pb-5">
       <div className="d-flex justify-content-center align-content-center">
@@ -88,7 +89,7 @@ const Reservation: React.FC = () => {
 
               <SimpleReactCalendar
                 onSelect={(start: Date) => {
-                  setDay(start.getUTCDate());
+                  setDay(start);
                 }}
                 headerPrevArrow={
                   <i className="calendar-header_button bi bi-arrow-left-short"></i>

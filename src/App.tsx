@@ -8,6 +8,7 @@ import styles from "./App.scss";
 import "../src/assets/styles/index.scss";
 import { ReservationContextProvider } from "./Context/ReservationContext";
 import { Calender, Header, Reservation } from "./components";
+import { DataContextProvider } from "./Context/DataContext";
 
 //@observer
 const App: React.FC = () => {
@@ -18,12 +19,13 @@ const App: React.FC = () => {
 
   return (
     <ReservationContextProvider>
-      <div className={styles.app}>
-        <Header />
+      <DataContextProvider>
+        <div className={styles.app}>
+          <Header />
 
-        {/* <Reservation showModal={() => setShowModal(true)} /> */}
+          {/* <Reservation showModal={() => setShowModal(true)} /> */}
 
-        {/* <div>
+          {/* <div>
         <input
           type="text"
           placeholder="Enter your name"
@@ -31,11 +33,10 @@ const App: React.FC = () => {
           onChange={(e) => setName(e.target.value)}
         />
       </div> */}
-        <Reservation />
-        <Calender />
-
-
-      </div>
+          <Reservation />
+          <Calender />
+        </div>
+      </DataContextProvider>
     </ReservationContextProvider>
   );
 };

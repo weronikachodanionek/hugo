@@ -3,14 +3,14 @@ import React, { useState, createContext, useContext } from "react";
 interface IReservationContext {
   room: string | undefined;
   desk: string | undefined;
-  day: number | undefined;
+  day: Date | undefined;
   user: string | undefined;
 }
 
 interface IReservationActionsContext {
   setRoom: React.Dispatch<React.SetStateAction<string | undefined>>;
   setDesk: React.Dispatch<React.SetStateAction<string | undefined>>;
-  setDay: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setDay: React.Dispatch<React.SetStateAction<Date | undefined>>;
   setUser: React.Dispatch<React.SetStateAction<string | undefined>>;
   blabla: () => void;
 }
@@ -29,7 +29,7 @@ export const useReservationActionsContext = () =>
 export const ReservationContextProvider: React.FC = ({ children }) => {
   const [room, setRoom] = useState<string>();
   const [desk, setDesk] = useState<string>();
-  const [day, setDay] = useState<number>();
+  const [day, setDay] = useState<Date>();
   const [user, setUser] = useState<string>();
 
   const blabla = () => console.log("działa");

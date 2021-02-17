@@ -1,9 +1,8 @@
 import React from "react";
 import classnames from "classnames";
 
-import { AvailabilityType, IDesk, IRoom } from "../../API/types";
+import { IDesk, IRoom } from "../../API/types";
 import styles from "./Room.module.scss";
-import { useReservationContext } from "../../Context/ReservationContext";
 import Point from "../Point/Point";
 
 export interface IRoomProps {
@@ -11,22 +10,16 @@ export interface IRoomProps {
 }
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
-  const { room: roomFromContext, day, user } = useReservationContext();
-
-  console.log("user", user, user?.length);
-
   return (
     <>
-      <p>{roomFromContext}</p>
-      <p>{day}</p>
-      <p>{user}</p>
-
       <div
         className={classnames(
           "gray-shadow position-relative d-flex flex-column justify-content-around align-items-center py-5",
           styles.room
         )}
       >
+        <p>{room.id}</p>
+
         {room?.desks.map((desk: IDesk) => (
           <div
             key={desk.id}
@@ -41,11 +34,11 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
               {desk.deskName}
             </p>
 
-            {user && user?.length > 0 ? (
+            {desk.user && desk.user?.length > 0 ? (
               <Point className="icon-unavailable">
                 <div className={classnames("text-center", styles.tooltip)}>
                   <i className="bi bi-person-check"></i>
-                  <span className="ml-2 font-weight-normal">{user}</span>
+                  <span className="ml-2 font-weight-normal">{desk.user}</span>
                 </div>
               </Point>
             ) : (

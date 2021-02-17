@@ -17,22 +17,18 @@ export const roomsData: IRoom[] = [
       {
         id: "sea-window",
         deskName: "S: Biurko przy oknie",
-        user: "",
       },
       {
         id: "sea-center",
         deskName: "S: Biurko środkowe",
-        user: "",
       },
       {
         id: "sea-door",
         deskName: "S: Biurko przy drzwiach",
-        user: "",
       },
       {
         id: "sea-corner",
         deskName: "S: Biurko w rogu",
-        user: "",
       },
     ],
   },
@@ -43,22 +39,18 @@ export const roomsData: IRoom[] = [
       {
         id: "penguins-window",
         deskName: "P: Biurko przy oknie",
-        user: "",
       },
       {
         id: "penguins-center",
         deskName: "P: Biurko środkowe",
-        user: "",
       },
       {
         id: "penguins-door",
         deskName: "P: Biurko przy drzwiach",
-        user: "",
       },
       {
         id: "penguins-corner",
         deskName: "P: Biurko w rogu",
-        user: "",
       },
     ],
   },
