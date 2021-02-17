@@ -10,14 +10,20 @@ import {
   useReservationActionsContext,
   useReservationContext,
 } from "../../Context/ReservationContext";
-import { IDesk, IRoom } from "../../API/types";
+import { AvailabilityType, IDay, IDesk, IRoom } from "../../API/types";
 import InputText from "../common/Inputs/TextInput";
+import {
+  useDataActionsContext,
+  useDataContext,
+} from "../../Context/DataContext";
 
 const Reservation: React.FC = () => {
   const [isOpenReservation, setOpenReservation] = useState<any>(false);
 
-  const { setRoom, setDay, setUser } = useReservationActionsContext();
-  const { room, user } = useReservationContext();
+  const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
+  const { room, desk, user, day } = useReservationContext();
+  const { data } = useDataContext();
+  const { setData } = useDataActionsContext();
 
   const roomsOptions: ISelectOptions[] = roomsData.map((room: IRoom) => ({
     label: room.roomName,
@@ -38,6 +44,26 @@ const Reservation: React.FC = () => {
     );
   }, [room]);
 
+  const handleReservation = () => {
+    const temp: IDay[] = data.map((day: IDay) => ({
+      ...day,
+      rooms: day.rooms.map((room: IRoom) => ({
+        ...room,
+        desks: room.desks.map((deskData: IDesk) =>
+          deskData.id === desk
+            ? {
+                ...deskData,
+                user: user,
+                available: AvailabilityType.unavailable,
+              }
+            : { ...deskData }
+        ),
+      })),
+    }));
+
+    setData(temp);
+    setOpenReservation(false);
+  };
 
   return (
     <div className="bg-gray pt-5 pb-5">
@@ -78,11 +104,11 @@ const Reservation: React.FC = () => {
               />
 
               <InputSelect
-                inputId="RoomId"
-                label="Wybierz pokój, który chcesz zarezerwować"
+                inputId="DeskId"
+                label="Wybierz biurko, które chcesz zarezerwować"
                 options={desks}
-                placeholder="Wybierz pokój"
-                onChange={(option: ISelectOptions) => setRoom(option.value)}
+                placeholder="Wybierz biurko"
+                onChange={(option: ISelectOptions) => setDesk(option.value)}
               />
 
               <div className="input-label">Wybierz datę</div>
@@ -104,7 +130,7 @@ const Reservation: React.FC = () => {
                 {isOpenReservation === true && (
                   <button
                     className="btn btn-violet"
-                    onClick={() => setOpenReservation(false)}
+                    onClick={handleReservation}
                   >
                     Zarezerwuj biurko
                   </button>

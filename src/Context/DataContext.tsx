@@ -6,7 +6,9 @@ interface IDataContext {
   data: IDay[];
 }
 
-interface IDataActionsContext {}
+interface IDataActionsContext {
+  setData: React.Dispatch<React.SetStateAction<IDay[]>>;
+}
 
 const DataContext = createContext<IDataContext>({} as IDataContext);
 const DataActionsContext = createContext<IDataActionsContext>(
@@ -30,7 +32,7 @@ export const DataContextProvider: React.FC = ({ children }) => {
 
   return (
     <DataContext.Provider value={{ data }}>
-      <DataActionsContext.Provider value={{}}>
+      <DataActionsContext.Provider value={{setData}}>
         {children}
       </DataActionsContext.Provider>
     </DataContext.Provider>
