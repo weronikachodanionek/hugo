@@ -4,12 +4,14 @@ interface IReservationContext {
   room: string | undefined;
   desk: string | undefined;
   day: number | undefined;
+  user: string | undefined;
 }
 
 interface IReservationActionsContext {
   setRoom: React.Dispatch<React.SetStateAction<string | undefined>>;
   setDesk: React.Dispatch<React.SetStateAction<string | undefined>>;
   setDay: React.Dispatch<React.SetStateAction<number | undefined>>;
+  setUser: React.Dispatch<React.SetStateAction<string | undefined>>;
   blabla: () => void;
 }
 
@@ -28,13 +30,14 @@ export const ReservationContextProvider: React.FC = ({ children }) => {
   const [room, setRoom] = useState<string>();
   const [desk, setDesk] = useState<string>();
   const [day, setDay] = useState<number>();
+  const [user, setUser] = useState<string>();
 
   const blabla = () => console.log("działa");
 
   return (
-    <ReservationContext.Provider value={{ room, desk, day }}>
+    <ReservationContext.Provider value={{ room, desk, day, user }}>
       <ReservationActionsContext.Provider
-        value={{ setRoom, blabla, setDesk, setDay }}
+        value={{ setRoom, blabla, setDesk, setDay, setUser }}
       >
         {children}
       </ReservationActionsContext.Provider>

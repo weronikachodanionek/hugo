@@ -70,11 +70,12 @@ export const Days: IDay[] = [
             id: "1",
             deskName: "Biurko koło okna",
             available: AvailabilityType.unavailable,
-            user: "Informatyk I",
+            user: "",
           },
           {
             id: "2",
             deskName: "Biurko środkowe",
+            user: "",
             available: AvailabilityType.available,
           },
 

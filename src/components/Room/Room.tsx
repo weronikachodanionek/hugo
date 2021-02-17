@@ -11,13 +11,15 @@ export interface IRoomProps {
 }
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
-  const { room: roomFromContext, desk, day } = useReservationContext();
+  const { room: roomFromContext, day, user } = useReservationContext();
+
+  console.log("user", user, user?.length);
 
   return (
     <>
       <p>{roomFromContext}</p>
       <p>{day}</p>
-      <p>{desk}</p>
+      <p>{user}</p>
 
       <div
         className={classnames(
@@ -39,19 +41,19 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
               {desk.deskName}
             </p>
 
-            {desk.available === AvailabilityType.available ? (
+            {user && user?.length > 0 ? (
+              <Point className="icon-unavailable">
+                <div className={classnames("text-center", styles.tooltip)}>
+                  <i className="bi bi-person-check"></i>
+                  <span className="ml-2 font-weight-normal">{user}</span>
+                </div>
+              </Point>
+            ) : (
               <Point className="icon-available">
                 <div className={classnames("text-center", styles.tooltip)}>
                   <span className="font-weight-normal text-primary text-uppercase">
                     Zarezerwuj
                   </span>
-                </div>
-              </Point>
-            ) : (
-              <Point className="icon-unavailable">
-                <div className={classnames("text-center", styles.tooltip)}>
-                  <i className="bi bi-person-check"></i>
-                  <span className="ml-2 font-weight-normal">{desk.user}</span>
                 </div>
               </Point>
             )}

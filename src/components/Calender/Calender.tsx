@@ -6,6 +6,7 @@ import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { IDay } from "../../API/types";
 import { getAllPlaces } from "../../API/fakeAPI";
 import Day from "../Day/Day";
+import { roomsData } from "../Reservation/Options";
 
 const Calender: React.FC = () => {
   const [days, setDays] = useState<IDay[]>([]);
@@ -42,7 +43,7 @@ const Calender: React.FC = () => {
 
           {days.map((day: IDay) => (
             <TabPanel>
-              <Day days={day} />
+              <Day rooms={roomsData} />
             </TabPanel>
           ))}
         </Tabs>

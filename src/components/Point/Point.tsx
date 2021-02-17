@@ -18,11 +18,7 @@ const Point: React.FC<IPointProps> = ({ className, children, ...props }) => {
     >
       <i
         onClick={() => setShowTooltip(!showTooltip)}
-        className={classnames(
-          styles.point,
-          className,
-          "bi bi-circle-fill"
-        )}
+        className={classnames(styles.point, className, "bi bi-circle-fill")}
         {...props}
       ></i>
 

@@ -11,12 +11,13 @@ import {
   useReservationContext,
 } from "../../Context/ReservationContext";
 import { IDesk, IRoom } from "../../API/types";
+import InputText from "../common/Inputs/TextInput";
 
 const Reservation: React.FC = () => {
   const [isOpenReservation, setOpenReservation] = useState<any>(false);
 
-  const { setRoom, setDay } = useReservationActionsContext();
-  const { room } = useReservationContext();
+  const { setRoom, setDay, setUser } = useReservationActionsContext();
+  const { room, user } = useReservationContext();
 
   const roomsOptions: ISelectOptions[] = roomsData.map((room: IRoom) => ({
     label: room.roomName,
@@ -58,6 +59,15 @@ const Reservation: React.FC = () => {
               onClick={() => setOpenReservation(!isOpenReservation)}
             ></i>
             <form>
+              <InputText
+                inputId="userId"
+                label="Podaj swoje imię"
+                name="User"
+                value={user}
+                placeholder="Wpisz imię"
+                onChange={(e: any) => setUser(e.target.value)}
+              />
+
               <InputSelect
                 inputId="RoomId"
                 label="Wybierz pokój, który chcesz zarezerwować"
