@@ -20,7 +20,7 @@ const Reservation: React.FC = () => {
   const [isOpenReservation, setOpenReservation] = useState<any>(false);
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
-  const { room, desk, user } = useReservationContext();
+  const { room, desk, user, day } = useReservationContext();
   const { data } = useDataContext();
   const { setData } = useDataActionsContext();
 
@@ -113,8 +113,11 @@ const Reservation: React.FC = () => {
               <div className="input-label">Wybierz datę</div>
 
               <SimpleReactCalendar
-                onSelect={(start: Date) => {
-                  setDay(start);
+                onSelect={(day: Date) => {
+                  setDay(day);
+                }}
+                onChange={(day: Date) => {
+                  setDay(day);
                 }}
                 headerPrevArrow={
                   <i className="calendar-header_button bi bi-arrow-left-short"></i>

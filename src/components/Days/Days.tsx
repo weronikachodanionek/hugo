@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import moment from "moment";
 
 import "react-tabs/style/react-tabs.scss";
 import "./Days.scss";
@@ -9,7 +10,7 @@ import { useDataContext } from "../../Context/DataContext";
 import { useReservationContext } from "../../Context/ReservationContext";
 
 const Days: React.FC = () => {
-  const [tabIndex, setTabIndex] = useState(0);
+  const [tabIndex, setTabIndex] = useState<number>(0);
 
   const { data } = useDataContext();
   const { day } = useReservationContext();
@@ -29,12 +30,18 @@ const Days: React.FC = () => {
             {/* {data.map((day: IDay) => (
               <Tab>{day.dayName}</Tab>
             ))} */}
-            <Tab> {day?.toDateString()} </Tab>
+
+            <Tab>
+              <span className="react-tabs-today">dziś jest: </span>{" "}
+              {moment(day).locale("pl").format("dddd DD.MM")}{" "}
+            </Tab>
+            <Tab> {moment(day).add(1, "days").format("dddd DD.MM")} </Tab>
+            <Tab> {moment(day).add(2, "days").format("dddd DD.MM")} </Tab>
           </TabList>
 
           {data.map((day: IDay) => (
             <TabPanel>
-              <Day data={day} />
+              <Day key={day.id} data={day} />
             </TabPanel>
           ))}
         </Tabs>

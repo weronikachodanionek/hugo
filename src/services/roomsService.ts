@@ -1,10 +1,12 @@
+import moment from "moment";
+
 import { getAllPlaces } from "../API/fakeAPI";
 import { IDay, IDesk, IRoom } from "../API/types";
 
 function mapPlacesToCompany(days: IDay[]): IDay[] {
   const company: IDay[] = days.map((day: IDay) => ({
     id: day.id,
-    date: day.date,
+    date: moment(day.date).format(),
     dayName: day.dayName,
     rooms: day.rooms.map((room: IRoom) => ({
       id: room.id,

@@ -21,13 +21,24 @@
 }
 
 .react-tabs__tab {
-  text-transform: uppercase;
   font-weight: 300;
   border: 0;
   padding: 0 20px;
   border: none;
   border-radius: 0;
   outline: none;
+  opacity: 0.6;
+
+  &:first-child{
+    font-size: 16px;
+    opacity: 1;
+    font-weight: 500;
+  }
+}
+
+.react-tabs-today{
+  font-weight: 300;
+  color: $dark;  
 }
 
 .react-tabs__tab--selected {
