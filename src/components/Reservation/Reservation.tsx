@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import classnames from "classnames";
 import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
@@ -21,7 +20,7 @@ const Reservation: React.FC = () => {
   const [isOpenReservation, setOpenReservation] = useState<any>(false);
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
-  const { room, desk, user, day } = useReservationContext();
+  const { room, desk, user } = useReservationContext();
   const { data } = useDataContext();
   const { setData } = useDataActionsContext();
 

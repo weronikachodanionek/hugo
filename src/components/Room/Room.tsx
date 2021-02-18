@@ -18,8 +18,6 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
           styles.room
         )}
       >
-        <p>{room.id}</p>
-
         {room?.desks.map((desk: IDesk) => (
           <div
             key={desk.id}

@@ -1,31 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import "react-tabs/style/react-tabs.scss";
 import "./Days.scss";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { IDay } from "../../API/types";
-import { getAllPlaces } from "../../API/fakeAPI";
 import Day from "../Day/Day";
-import { roomsData } from "../Reservation/Options";
 import { useDataContext } from "../../Context/DataContext";
+import { useReservationContext } from "../../Context/ReservationContext";
 
 const Days: React.FC = () => {
-  const [days, setDays] = useState<IDay[]>([] as IDay[]);
   const [tabIndex, setTabIndex] = useState(0);
 
-  // (function () {
-  //   /*eslint-disable */
-  //   getAllPlaces().then(
-  //     (days) => {
-  //       console.log("yyy", days);
-  //       // setDays(days);
-  //     },
-  //     (error) => console.log(error)
-  //   );
-  //   /*eslint-enable */
-  // })();
-
   const { data } = useDataContext();
+  const { day } = useReservationContext();
 
   return (
     <div
@@ -39,9 +26,10 @@ const Days: React.FC = () => {
           onSelect={(index: number) => setTabIndex(index)}
         >
           <TabList>
-            {data.map((day: IDay) => (
+            {/* {data.map((day: IDay) => (
               <Tab>{day.dayName}</Tab>
-            ))}
+            ))} */}
+            <Tab> {day?.toDateString()} </Tab>
           </TabList>
 
           {data.map((day: IDay) => (

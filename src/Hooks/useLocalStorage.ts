@@ -1,28 +1,28 @@
 import { useState } from "react";
-import { observable, action, computed } from "mobx";
 
-export default function useLocalStorage<T>(key: string, initialValue: T) {
-  const [storedValue, setStoredValue] = useState<T>(() => {
+export const useLocalStorage = (key: any, initialValue: any) => {
+  const [storedValue, setStoredValue] = useState(() => {
     try {
       const item = window.localStorage.getItem(key);
       return item ? JSON.parse(item) : initialValue;
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.error(err);
       return initialValue;
     }
   });
 
-  const setValue = (value: T | ((val: T) => T)) => {
+  const setValue = (value: any) => {
     try {
-            const valueToStore =
+      const valueToStore =
         value instanceof Function ? value(storedValue) : value;
       setStoredValue(valueToStore);
-      console.log();
       window.localStorage.setItem(key, JSON.stringify(valueToStore));
-    } catch (error) {
-      console.log(error);
+    } catch (err) {
+      console.error(err);
     }
   };
 
   return [storedValue, setValue];
-}
+};
+
+export default useLocalStorage;

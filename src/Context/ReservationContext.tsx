@@ -29,7 +29,7 @@ export const useReservationActionsContext = () =>
 export const ReservationContextProvider: React.FC = ({ children }) => {
   const [room, setRoom] = useState<string>();
   const [desk, setDesk] = useState<string>();
-  const [day, setDay] = useState<Date>();
+  const [day, setDay] = useState<Date | undefined>(new Date());
   const [user, setUser] = useState<string>();
 
   const blabla = () => console.log("działa");

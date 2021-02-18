@@ -4,7 +4,6 @@ import classnames from "classnames";
 import styles from "./Day.module.scss";
 import { IDay, IRoom } from "../../API/types";
 import Room from "../Room/Room";
-import { useDataContext } from "../../Context/DataContext";
 interface IDayProps {
   data: IDay;
 }
