@@ -3,7 +3,7 @@ import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
 import "./Reservation.scss";
-import { ISelectOptions, roomsData } from "./Options";
+import { ISelectOptions, KindOfPlace, roomsData } from "./Options";
 import InputSelect from "../common/Inputs/InputSelect";
 import {
   useReservationActionsContext,
@@ -76,9 +76,11 @@ const Reservation: React.FC = () => {
           </button>
         )}
       </div>
+      <p>{desk}</p>
+      <p>{room}</p>
 
       <Collapse isOpened={isOpenReservation}>
-        <div className="reservation-screen bg-silver d-flex justify-content-center align-items-center">
+        <div className="reservation-screen bg-gray d-flex justify-content-center align-items-center">
           <div className="reservation-modal bg-white d-flex justify-content-center align-items-center flex-column">
             <i
               className="bi bi-x reservation-close d-flex justify-content-end"
@@ -100,6 +102,7 @@ const Reservation: React.FC = () => {
                 options={roomsOptions}
                 placeholder="Wybierz pokój"
                 onChange={(option: ISelectOptions) => setRoom(option.value)}
+                value={setRoom(room)}
               />
 
               <InputSelect
@@ -108,6 +111,7 @@ const Reservation: React.FC = () => {
                 options={desks}
                 placeholder="Wybierz biurko"
                 onChange={(option: ISelectOptions) => setDesk(option.value)}
+                value={desk}
               />
 
               <div className="input-label">Wybierz datę</div>

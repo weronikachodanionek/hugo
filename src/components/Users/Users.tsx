@@ -17,10 +17,10 @@ const Users: React.FC = () => {
       </h4>
 
       <div className="d-flex justify-content-start align-items-center col-10 flex-wrap">
-        {usersList?.map((user: IUser) => (
-          <>
+        {usersList?.map((user: IUser, key) => (
+          <React.Fragment key={key}>
             {user.location === LocationType.office && (
-              <div
+              <div              
                 className={classnames(
                   "d-flex justify-content-center align-items-center mr-3"
                 )}
@@ -34,7 +34,7 @@ const Users: React.FC = () => {
                 ></i>
               </div>
             )}
-          </>
+          </React.Fragment>
         ))}
       </div>
     </div>

@@ -10,6 +10,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   name: string;
   value: any;
   className?: string;
+  classNameGroup?: string;
   placeholder: string;
 }
 
@@ -21,10 +22,11 @@ const InputText: React.FC<IInputProps> = ({
   value,
   placeholder,
   className,
+  classNameGroup,
   ...props
 }) => {
   return (
-    <>
+    <div className={classNameGroup}>
       <div
         className={classnames(
           "form-group w-100 d-flex flex-column"
@@ -43,7 +45,7 @@ const InputText: React.FC<IInputProps> = ({
           {...props}
         />
       </div>
-    </>
+    </div>
   );
 };
 

@@ -7,8 +7,10 @@
   outline: none;
   padding: $input-padding-y $input-padding-x;
 
+
   &:active,
   &:focus {
+    background-color: $white;
     border: $input-border-width solid $secondary;
   }
 }

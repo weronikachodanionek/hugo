@@ -10,11 +10,16 @@ const Header: React.FC = () => {
       <div
         className={classnames(
           styles.header,
-          "w-100 position-relative d-flex justify-content-center align-items-center pb-5"
+          "w-100 d-flex justify-content-end align-items-end pb-5"
         )}
       >
-        <div className={classnames(styles.headerUser, "position-absolute col-3")}>
-        <UserInformation />
+        <div
+          className={classnames(
+            styles.headerUser,
+            ""
+          )}
+        >
+          <UserInformation />
         </div>
       </div>
     </>

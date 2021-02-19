@@ -11,7 +11,6 @@ import { useReservationContext } from "../../Context/ReservationContext";
 
 const Days: React.FC = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
-
   const { data } = useDataContext();
   const { day } = useReservationContext();
 
@@ -25,23 +24,20 @@ const Days: React.FC = () => {
         <Tabs
           selectedIndex={tabIndex}
           onSelect={(index: number) => setTabIndex(index)}
+          key={tabIndex}
         >
           <TabList>
-            {/* {data.map((day: IDay) => (
-              <Tab>{day.dayName}</Tab>
-            ))} */}
-
             <Tab>
-              <span className="react-tabs-today">dziś jest: </span>{" "}
-              {moment(day).locale("pl").format("dddd DD.MM")}{" "}
+              <span className="react-tabs-today">dziś jest: </span>
+              {moment(day).locale("pl").format("dddd DD.MM")}
             </Tab>
             <Tab> {moment(day).add(1, "days").format("dddd DD.MM")} </Tab>
             <Tab> {moment(day).add(2, "days").format("dddd DD.MM")} </Tab>
           </TabList>
 
           {data.map((day: IDay) => (
-            <TabPanel>
-              <Day key={day.id} data={day} />
+            <TabPanel key={day.id}>
+              <Day data={day} />
             </TabPanel>
           ))}
         </Tabs>

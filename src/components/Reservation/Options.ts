@@ -9,6 +9,11 @@ export interface ISelectDay {
   value: string;
 }
 
+export enum KindOfPlace {
+  roomPlace = "roomPlace",
+  deskPlace = "deskPlace",
+}
+
 export const roomsData: IRoom[] = [
   {
     id: "sea",
