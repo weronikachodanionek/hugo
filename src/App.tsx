@@ -6,6 +6,7 @@ import "../src/assets/styles/index.scss";
 import { ReservationContextProvider } from "./Context/ReservationContext";
 import { Calender, Header, Reservation, Users } from "./components";
 import { DataContextProvider } from "./Context/DataContext";
+import Statistics from "./components/Statistics/Statistics";
 
 moment.locale("pl");
 
@@ -18,6 +19,7 @@ const App: React.FC = () => {
           <Reservation />
           <Calender />
           <Users />
+          <Statistics />
         </div>
       </DataContextProvider>
     </ReservationContextProvider>

@@ -2,7 +2,7 @@ import React from "react";
 import classnames from "classnames";
 
 import styles from "./Users.module.scss";
-import { IUser, PresenceType, usersList } from "./UsersList";
+import { IUser, LocationType, usersList } from "./UsersList";
 
 const Users: React.FC = () => {
   return (
@@ -19,7 +19,7 @@ const Users: React.FC = () => {
       <div className="d-flex justify-content-start align-items-center col-10 flex-wrap">
         {usersList?.map((user: IUser) => (
           <>
-            {user.presence === PresenceType.present && (
+            {user.location === LocationType.office && (
               <div
                 className={classnames(
                   "d-flex justify-content-center align-items-center mr-3"

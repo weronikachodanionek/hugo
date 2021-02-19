@@ -20,7 +20,7 @@ const Reservation: React.FC = () => {
   const [isOpenReservation, setOpenReservation] = useState<any>(false);
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
-  const { room, desk, user, day } = useReservationContext();
+  const { room, desk, user } = useReservationContext();
   const { data } = useDataContext();
   const { setData } = useDataActionsContext();
 

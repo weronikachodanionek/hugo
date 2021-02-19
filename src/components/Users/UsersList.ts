@@ -1,52 +1,52 @@
-export enum PresenceType {
-  present = "Obecny",
-  absent = "Nieobecny",
+export enum LocationType {
+  home = "Dom",
+  office = "Biuro",
 }
 
 export interface IUser {
   name: string;
-  presence: string;
+  location: string;
 }
 
 export const usersList: IUser[] = [
   {
     name: "Oktawiusz August",
-    presence: PresenceType.present,
+    location: LocationType.home,
   },
   {
     name: "Tyberiusz",
-    presence: PresenceType.present,
+    location: LocationType.office,
   },
   {
     name: "Kaligula",
-    presence: PresenceType.present,
+    location: LocationType.home,
   },
   {
     name: "Neron",
-    presence: PresenceType.present,
+    location: LocationType.home,
   },
   {
     name: "Galba",
-    presence: PresenceType.present,
+    location: LocationType.office,
   },
   {
     name: "Oton",
-    presence: PresenceType.present,
+    location: LocationType.home,
   },
   {
     name: "Witeliusz",
-    presence: PresenceType.present,
+    location: LocationType.office,
   },
   {
     name: "Wespazjan",
-    presence: PresenceType.present,
+    location: LocationType.office,
   },
   {
     name: "Tytus",
-    presence: PresenceType.present,
+    location: LocationType.office,
   },
   {
     name: "Domicjan",
-    presence: PresenceType.present,
+    location: LocationType.office,
   },
 ];
