@@ -9,7 +9,7 @@ const Users: React.FC = () => {
     <div
       className={classnames(
         styles.users,
-        "d-flex justify-content-center align-items-center bg-gray flex-wrap flex-column row"
+        "d-flex justify-content-center align-items-center bg-gray flex-wrap flex-column col"
       )}
     >
       <h4 className={classnames(styles.usersHeader, "pb-4 col-10")}>
@@ -20,7 +20,7 @@ const Users: React.FC = () => {
         {usersList?.map((user: IUser, key) => (
           <React.Fragment key={key}>
             {user.location === LocationType.office && (
-              <div              
+              <div
                 className={classnames(
                   "d-flex justify-content-center align-items-center mr-3"
                 )}

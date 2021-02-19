@@ -3,7 +3,7 @@ import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
 import "./Reservation.scss";
-import { ISelectOptions, KindOfPlace, roomsData } from "./Options";
+import { ISelectOptions, roomsData } from "./Options";
 import InputSelect from "../common/Inputs/InputSelect";
 import {
   useReservationActionsContext,
@@ -15,6 +15,7 @@ import {
   useDataActionsContext,
   useDataContext,
 } from "../../Context/DataContext";
+import { Button } from "../common";
 
 const Reservation: React.FC = () => {
   const [isOpenReservation, setOpenReservation] = useState<any>(false);
@@ -65,15 +66,15 @@ const Reservation: React.FC = () => {
   };
 
   return (
-    <div className="bg-gray pt-5 pb-5">
+    <div className="bg-gray pt-5 pb-5 col">
       <div className="d-flex justify-content-center align-content-center">
         {isOpenReservation === false && (
-          <button
-            className="btn btn-pink"
+          <Button
+            className="btn-pink"
             onClick={() => setOpenReservation(!isOpenReservation)}
           >
             Zarezerwuj biurko
-          </button>
+          </Button>
         )}
       </div>
       <p>{desk}</p>
@@ -102,7 +103,7 @@ const Reservation: React.FC = () => {
                 options={roomsOptions}
                 placeholder="Wybierz pokój"
                 onChange={(option: ISelectOptions) => setRoom(option.value)}
-                value={setRoom(room)}
+               // value={room}
               />
 
               <InputSelect
@@ -111,7 +112,7 @@ const Reservation: React.FC = () => {
                 options={desks}
                 placeholder="Wybierz biurko"
                 onChange={(option: ISelectOptions) => setDesk(option.value)}
-                value={desk}
+               // value={desk}
               />
 
               <div className="input-label">Wybierz datę</div>
@@ -134,12 +135,12 @@ const Reservation: React.FC = () => {
 
               <div className="w-100 d-flex justify-content-center align-content-center">
                 {isOpenReservation === true && (
-                  <button
+                  <Button
                     className="btn btn-violet"
                     onClick={handleReservation}
                   >
                     Zarezerwuj biurko
-                  </button>
+                  </Button>
                 )}
               </div>
             </form>

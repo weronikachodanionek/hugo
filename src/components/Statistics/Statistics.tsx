@@ -42,7 +42,6 @@ const Statistics: React.FC = () => {
         ]}
         labelStyle={(index) => ({
           fill: "#212529",
-          fontWeight: "bold",
           fontSize: "6px",
         })}
         center={[50, 50]}

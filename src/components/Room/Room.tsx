@@ -5,6 +5,7 @@ import { IDesk, IRoom } from "../../API/types";
 import styles from "./Room.module.scss";
 import Point from "../Point/Point";
 import { useReservationActionsContext } from "../../Context/ReservationContext";
+import { Button } from "../common";
 
 export interface IRoomProps {
   room: IRoom;
@@ -49,16 +50,25 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
               </Point>
             ) : (
               <Point className="icon-available">
-                <div className={classnames("text-center", styles.tooltip)}>
-                  <span
+                {/* <div className={classnames("text-center", styles.tooltip)}>
+                   <span
                     onClick={() =>
                       handleSetChosenPlace(room.roomName, desk.deskName)
                     }
                     className="font-weight-normal text-primary text-uppercase"
                   >
                     Zarezerwuj
-                  </span>
-                </div>
+                  </span> 
+               
+                </div> */}
+                <Button
+                  onClick={() =>
+                    handleSetChosenPlace(room.roomName, desk.deskName)
+                  }
+                  className="btn-pink"
+                >
+                  Zarezerwuj
+                </Button>
               </Point>
             )}
           </div>

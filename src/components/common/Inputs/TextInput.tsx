@@ -12,6 +12,7 @@ export interface IInputProps extends InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   classNameGroup?: string;
   placeholder: string;
+  ref?: any;
 }
 
 const InputText: React.FC<IInputProps> = ({
@@ -22,6 +23,7 @@ const InputText: React.FC<IInputProps> = ({
   value,
   placeholder,
   className,
+  ref,
   classNameGroup,
   ...props
 }) => {
@@ -40,9 +42,10 @@ const InputText: React.FC<IInputProps> = ({
           type={type}
           name={name}
           value={value}
+          ref={ref}
           placeholder={placeholder}
           className={classnames(styles.inputText, className)}
-          {...props}
+          {...props}          
         />
       </div>
     </div>
