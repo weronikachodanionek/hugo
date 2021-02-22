@@ -20,6 +20,7 @@ const UserInformation: React.FC = () => {
   console.log(watch("userName"));
 
   const [showUserPanel, setUserPanelShow] = useState<Boolean>(false);
+  const [showLogin, setLogin] = useState<Boolean>(true);
   const [name, setName] = useLocalStorage("", "");
   const [password, setPassword] = useLocalStorage("", "");
 
@@ -29,7 +30,7 @@ const UserInformation: React.FC = () => {
         onClick={() => setUserPanelShow(!showUserPanel)}
         className="btn-pink mt-3"
       >
-        Zaloguj się
+        Panel użytkownika
       </Button>
 
       {showUserPanel === true && (
@@ -44,38 +45,51 @@ const UserInformation: React.FC = () => {
 
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="d-flex flex-column justify-content-center align-items-center px-4"
+            className={classnames(
+              styles.userLogin,
+              "d-flex flex-column justify-content-center align-items-center px-4"
+            )}
           >
-            <InputText
-              name="userName"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              label="Wpisz swoje imię"
-              inputId="nameId"
-              placeholder="Podaj imię"
-              classNameGroup="justify-content-center align-items-center w-100"
-              ref={register({ required: true, minLength: 3, max: 10 })}
-            ></InputText>
-            {errors.userName && <span>Imię jest wymagane</span>}
+            {showLogin && (
+              <>
+                <InputText
+                  name="userName"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  label="Wpisz swoje imię"
+                  inputId="nameId"
+                  placeholder="Podaj imię"
+                  classNameGroup="justify-content-center align-items-center w-100"
+                  ref={register({ required: true, minLength: 3, max: 10 })}
+                ></InputText>
+                {errors.userName && <span>Imię jest wymagane</span>}
 
-            <InputText
-              name="userPassword"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              label="Wpisz hasło"
-              inputId="passwordId"
-              type="password"
-              placeholder="****"
-              ref={register({ required: true, minLength: 3, max: 10 })}
-              classNameGroup="justify-content-center align-items-center w-100"
-            ></InputText>
-            {errors.userPassword && <span>Hasło jest wymagane</span>}
+                <InputText
+                  name="userPassword"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  label="Wpisz hasło"
+                  inputId="passwordId"
+                  type="password"
+                  placeholder="****"
+                  ref={register({ required: true, minLength: 3, max: 10 })}
+                  classNameGroup="justify-content-center align-items-center w-100"
+                ></InputText>
+                {errors.userPassword && <span>Hasło jest wymagane</span>}
+              </>
+            )}
 
-            <Button className="btn btn-violet mt-2" type="submit">
-              Zaloguj
-            </Button>
-            <p>{name}</p>
-            <p>{password}</p>
+            {showLogin && (
+              <Button
+                className="btn btn-violet mt-2"
+                type="submit"
+                onClick={() => setLogin(false)}
+              >
+                Zaloguj
+              </Button>
+            )}
+
+            {!showLogin && <>Witaj {name}</>}
           </form>
         </div>
       )}

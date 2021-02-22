@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
@@ -16,9 +16,17 @@ import {
   useDataContext,
 } from "../../Context/DataContext";
 import { Button } from "../common";
+import useLocalStorage from "../../Hooks/useLocalStorage";
+import {
+  useCollapseActionsContext,
+  useCollapseContext,
+} from "../../Context/ReservationCollapseContext";
 
 const Reservation: React.FC = () => {
-  const [isOpenReservation, setOpenReservation] = useState<any>(false);
+  const [yourName] = useLocalStorage("", "");
+
+  const { collapseReservation } = useCollapseContext();
+  const { setCollapseReservation } = useCollapseActionsContext();
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
   const { room, desk, user } = useReservationContext();
@@ -62,91 +70,102 @@ const Reservation: React.FC = () => {
     }));
 
     setData(temp);
-    setOpenReservation(false);
+    setCollapseReservation(false);
   };
 
   return (
     <div className="bg-gray pt-5 pb-5 col">
+      {collapseReservation}
+
       <div className="d-flex justify-content-center align-content-center">
-        {isOpenReservation === false && (
+        {/* {collapseReservation === false && (
           <Button
             className="btn-pink"
-            onClick={() => setOpenReservation(!isOpenReservation)}
+            onClick={() => setCollapseReservation(true)}
           >
             Zarezerwuj biurko
           </Button>
-        )}
+        )} */}
+
+        <Button
+          className="btn-pink"
+          onClick={() => setCollapseReservation(true)}
+        >
+          Zarezerwuj biurko
+        </Button>
       </div>
       <p>{desk}</p>
       <p>{room}</p>
 
-      <Collapse isOpened={isOpenReservation}>
-        <div className="reservation-screen bg-gray d-flex justify-content-center align-items-center">
-          <div className="reservation-modal bg-white d-flex justify-content-center align-items-center flex-column">
-            <i
-              className="bi bi-x reservation-close d-flex justify-content-end"
-              onClick={() => setOpenReservation(!isOpenReservation)}
-            ></i>
-            <form>
-              <InputText
-                inputId="userId"
-                label="Podaj swoje imię"
-                name="User"
-                value={user}
-                placeholder="Wpisz imię"
-                onChange={(e: any) => setUser(e.target.value)}
-              />
+      {collapseReservation === true && (
+        <Collapse isOpened={collapseReservation}>
+          <div className="reservation-screen bg-gray d-flex justify-content-center align-items-center">
+            <div className="reservation-modal bg-white d-flex justify-content-center align-items-center flex-column">
+              <i
+                className="bi bi-x reservation-close d-flex justify-content-end"
+                onClick={() => setCollapseReservation(!collapseReservation)}
+              ></i>
+              <form>
+                <InputText
+                  inputId="userId"
+                  label="Podaj swoje imię"
+                  name="User"
+                  value={user}
+                  placeholder={yourName}
+                  onChange={(e: any) => setUser(e.target.value)}
+                />
 
-              <InputSelect
-                inputId="RoomId"
-                label="Wybierz pokój, który chcesz zarezerwować"
-                options={roomsOptions}
-                placeholder="Wybierz pokój"
-                onChange={(option: ISelectOptions) => setRoom(option.value)}
-               // value={room}
-              />
+                <InputSelect
+                  inputId="RoomId"
+                  label="Wybierz pokój, który chcesz zarezerwować"
+                  options={roomsOptions}
+                  placeholder="Wybierz pokój"
+                  onChange={(option: ISelectOptions) => setRoom(option.value)}
+                  // value={room}
+                />
 
-              <InputSelect
-                inputId="DeskId"
-                label="Wybierz biurko, które chcesz zarezerwować"
-                options={desks}
-                placeholder="Wybierz biurko"
-                onChange={(option: ISelectOptions) => setDesk(option.value)}
-               // value={desk}
-              />
+                <InputSelect
+                  inputId="DeskId"
+                  label="Wybierz biurko, które chcesz zarezerwować"
+                  options={desks}
+                  placeholder="Wybierz biurko"
+                  onChange={(option: ISelectOptions) => setDesk(option.value)}
+                  // value={desk}
+                />
 
-              <div className="input-label">Wybierz datę</div>
+                <div className="input-label">Wybierz datę</div>
 
-              <SimpleReactCalendar
-                onSelect={(day: Date) => {
-                  setDay(day);
-                }}
-                onChange={(day: Date) => {
-                  setDay(day);
-                }}
-                headerPrevArrow={
-                  <i className="calendar-header_button bi bi-arrow-left-short"></i>
-                }
-                headerNextArrow={
-                  <i className="calendar-header_button bi bi-arrow-right-short"></i>
-                }
-                activeMonth={new Date()}
-              />
+                <SimpleReactCalendar
+                  onSelect={(day: Date) => {
+                    setDay(day);
+                  }}
+                  onChange={(day: Date) => {
+                    setDay(day);
+                  }}
+                  headerPrevArrow={
+                    <i className="calendar-header_button bi bi-arrow-left-short"></i>
+                  }
+                  headerNextArrow={
+                    <i className="calendar-header_button bi bi-arrow-right-short"></i>
+                  }
+                  activeMonth={new Date()}
+                />
 
-              <div className="w-100 d-flex justify-content-center align-content-center">
-                {isOpenReservation === true && (
-                  <Button
-                    className="btn btn-violet"
-                    onClick={handleReservation}
-                  >
-                    Zarezerwuj biurko
-                  </Button>
-                )}
-              </div>
-            </form>
+                <div className="w-100 d-flex justify-content-center align-content-center">
+                  {collapseReservation === true && (
+                    <Button
+                      className="btn btn-violet"
+                      onClick={handleReservation}
+                    >
+                      Zarezerwuj biurko
+                    </Button>
+                  )}
+                </div>
+              </form>
+            </div>
           </div>
-        </div>
-      </Collapse>
+        </Collapse>
+      )}
     </div>
   );
 };

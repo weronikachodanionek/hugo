@@ -6,6 +6,7 @@ import styles from "./Room.module.scss";
 import Point from "../Point/Point";
 import { useReservationActionsContext } from "../../Context/ReservationContext";
 import { Button } from "../common";
+import { useCollapseActionsContext, useCollapseContext } from "../../Context/ReservationCollapseContext";
 
 export interface IRoomProps {
   room: IRoom;
@@ -13,10 +14,15 @@ export interface IRoomProps {
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
   const { setDesk, setRoom } = useReservationActionsContext();
+  
+  const { collapseReservation } = useCollapseContext();
+  const { setCollapseReservation } = useCollapseActionsContext();
 
   const handleSetChosenPlace = (room: string, desk: string) => {
     setDesk(desk);
     setRoom(room);
+    setCollapseReservation(true);
+    window.scrollTo(0, 0);
   };
 
   return (
