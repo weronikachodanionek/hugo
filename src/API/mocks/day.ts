@@ -5,8 +5,8 @@ import moment from "moment";
 export const Days: IDay[] = [
   {
     id: "0",
-    dayName: moment(new Date()).format("dddd DD.MM"),
-    date: "2020-07-11",
+    dayName: moment().format("dddd DD.MM"),
+    date: moment().format(),
     rooms: [
       {
         id: "sea",
@@ -67,9 +67,8 @@ export const Days: IDay[] = [
 
   {
     id: "1",
-    //dayName: new Date("2020-07-19").getDate().toString(),
-    dayName: moment(new Date()).add(1, "days").format("dddd DD.MM"),
-    date: "2020-07-12",
+    dayName: moment().add(1, "days").format("dddd DD.MM"),
+    date: moment().add(1, "days").format(),
     rooms: [
       {
         id: "sea",
@@ -105,7 +104,7 @@ export const Days: IDay[] = [
           {
             id: "penguins-window",
             deskName: "Biurko koło okna",
-            user: "VVVVVV",
+            user: "",
           },
           {
             id: "penguins-center",
@@ -116,7 +115,7 @@ export const Days: IDay[] = [
           {
             id: "penguins-door",
             deskName: "Biurko koło drzwi",
-            user: "WERA WERA",
+            user: "",
           },
           {
             id: "penguins-corner",
@@ -130,9 +129,8 @@ export const Days: IDay[] = [
 
   {
     id: "2",
-    //dayName: new Date("2020-07-19").getDate().toString(),
-    dayName: moment(new Date()).add(2, "days").format("dddd DD.MM"),
-    date: "2020-07-12",
+    dayName: moment().add(2, "days").format("dddd DD.MM"),
+    date: moment().add(2, "days").format(),
     rooms: [
       {
         id: "sea",
@@ -141,7 +139,7 @@ export const Days: IDay[] = [
           {
             id: "sea-window",
             deskName: "Biurko koło okna",
-            user: "ABC DH GH",
+            user: "",
           },
           {
             id: "sea-center",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
@@ -21,17 +21,25 @@ import {
   useCollapseActionsContext,
   useCollapseContext,
 } from "../../Context/ReservationCollapseContext";
+import Table from "./Table";
+import moment from "moment";
 
 const Reservation: React.FC = () => {
   const [yourName] = useLocalStorage("", "");
 
-  const { collapseReservation } = useCollapseContext();
-  const { setCollapseReservation } = useCollapseActionsContext();
+  const { collapseReservation, visibleButton } = useCollapseContext();
+  const {
+    setCollapseReservation,
+    setVisibileButton,
+  } = useCollapseActionsContext();
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
-  const { room, desk, user } = useReservationContext();
+  const { room, desk, user, day: contextDay } = useReservationContext();
   const { data } = useDataContext();
   const { setData } = useDataActionsContext();
+
+  const [roomValue, setRoomValue] = useState<ISelectOptions>();
+  const [deskValue, setDeskValue] = useState<ISelectOptions>();
 
   const roomsOptions: ISelectOptions[] = roomsData.map((room: IRoom) => ({
     label: room.roomName,
@@ -40,9 +48,22 @@ const Reservation: React.FC = () => {
 
   const [desks, setDesks] = useState<ISelectOptions[]>([]);
 
+  const handleButtonBehavior = () => {
+    setCollapseReservation(!collapseReservation);
+    setVisibileButton(!visibleButton);
+  };
+
+  useEffect(() => {
+    setDeskValue(desks.find((option: ISelectOptions) => option.value === desk));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [desk, desks]);
+
   useEffect(() => {
     const roomData: IRoom | undefined = roomsData.find(
       (data: IRoom) => data.id === room
+    );
+    setRoomValue(
+      roomsOptions.find((option: ISelectOptions) => option.value === room)
     );
     setDesks(
       roomData?.desks.map((desk: IDesk) => ({
@@ -50,47 +71,43 @@ const Reservation: React.FC = () => {
         value: desk.id,
       })) ?? []
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
   const handleReservation = () => {
-    const temp: IDay[] = data.map((day: IDay) => ({
-      ...day,
-      rooms: day.rooms.map((room: IRoom) => ({
-        ...room,
-        desks: room.desks.map((deskData: IDesk) =>
-          deskData.id === desk
-            ? {
-                ...deskData,
-                user: user,
-                available: AvailabilityType.unavailable,
-              }
-            : { ...deskData }
-        ),
-      })),
-    }));
+    const temp: IDay[] = data.map((day: IDay) =>
+      moment(day.date).isSame(contextDay, 'day')
+        ? 
+         {
+            ...day,
+            rooms: day.rooms.map((room: IRoom) => ({
+              ...room,
+              desks: room.desks.map((deskData: IDesk) =>
+                deskData.id === desk
+                  ? {
+                      ...deskData,
+                      user: user,
+                      available: AvailabilityType.unavailable,
+                    }
+                  : { ...deskData }
+              ),
+            })),
+          }
+
+          : {
+            ...day,
+          }
+    );
 
     setData(temp);
     setCollapseReservation(false);
+    setVisibileButton(false);
   };
 
   return (
     <div className="bg-gray pt-5 pb-5 col">
-      {collapseReservation}
-
       <div className="d-flex justify-content-center align-content-center">
-        {/* {collapseReservation === false && (
-          <Button
-            className="btn-pink"
-            onClick={() => setCollapseReservation(true)}
-          >
-            Zarezerwuj biurko
-          </Button>
-        )} */}
-
-        <Button
-          className="btn-pink"
-          onClick={() => setCollapseReservation(true)}
-        >
+        <Button className="btn-pink" onClick={() => handleButtonBehavior()}>
           Zarezerwuj biurko
         </Button>
       </div>
@@ -103,7 +120,7 @@ const Reservation: React.FC = () => {
             <div className="reservation-modal bg-white d-flex justify-content-center align-items-center flex-column">
               <i
                 className="bi bi-x reservation-close d-flex justify-content-end"
-                onClick={() => setCollapseReservation(!collapseReservation)}
+                onClick={() => handleButtonBehavior()}
               ></i>
               <form>
                 <InputText
@@ -121,7 +138,7 @@ const Reservation: React.FC = () => {
                   options={roomsOptions}
                   placeholder="Wybierz pokój"
                   onChange={(option: ISelectOptions) => setRoom(option.value)}
-                  // value={room}
+                  value={roomValue}
                 />
 
                 <InputSelect
@@ -130,7 +147,7 @@ const Reservation: React.FC = () => {
                   options={desks}
                   placeholder="Wybierz biurko"
                   onChange={(option: ISelectOptions) => setDesk(option.value)}
-                  // value={desk}
+                  value={deskValue}
                 />
 
                 <div className="input-label">Wybierz datę</div>

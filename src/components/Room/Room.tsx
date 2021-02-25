@@ -6,7 +6,7 @@ import styles from "./Room.module.scss";
 import Point from "../Point/Point";
 import { useReservationActionsContext } from "../../Context/ReservationContext";
 import { Button } from "../common";
-import { useCollapseActionsContext, useCollapseContext } from "../../Context/ReservationCollapseContext";
+import { useCollapseActionsContext } from "../../Context/ReservationCollapseContext";
 
 export interface IRoomProps {
   room: IRoom;
@@ -14,15 +14,22 @@ export interface IRoomProps {
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
   const { setDesk, setRoom } = useReservationActionsContext();
-  
-  const { collapseReservation } = useCollapseContext();
-  const { setCollapseReservation } = useCollapseActionsContext();
+
+  const {
+    setCollapseReservation,
+    setVisibileButton,
+  } = useCollapseActionsContext();
 
   const handleSetChosenPlace = (room: string, desk: string) => {
     setDesk(desk);
     setRoom(room);
     setCollapseReservation(true);
-    window.scrollTo(0, 0);
+    setVisibileButton(false);
+    window.scroll({
+      top: 650,
+      left: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
@@ -69,7 +76,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
                 </div> */}
                 <Button
                   onClick={() =>
-                    handleSetChosenPlace(room.roomName, desk.deskName)
+                    handleSetChosenPlace(room.id, desk.id)
                   }
                   className="btn-pink"
                 >
