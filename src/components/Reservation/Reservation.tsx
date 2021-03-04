@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import moment from "moment";
+
 import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
+import { Button, InputSelect } from "../common";
+
 import "./Reservation.scss";
+import { IDailyUsers } from "../../API/mocks/usersPerDay";
+import { IUser, LocationType } from "../../API/mocks/users";
 import { ISelectOptions, roomsData, usersData } from "./Options";
-import InputSelect from "../common/Inputs/InputSelect";
-import {
-  useReservationActionsContext,
-  useReservationContext,
-} from "../../Context/ReservationContext";
 import {
   AvailabilityType,
   IDay,
@@ -20,14 +21,14 @@ import {
   useDataActionsContext,
   useDataContext,
 } from "../../Context/DataContext";
-import { Button } from "../common";
+import {
+  useReservationActionsContext,
+  useReservationContext,
+} from "../../Context/ReservationContext";
 import {
   useCollapseActionsContext,
-  useCollapseContext,
+  useCollapseContext,  
 } from "../../Context/ReservationCollapseContext";
-import moment from "moment";
-import { IDailyUsers } from "../../API/mocks/usersPerDay";
-import { IUser, LocationType } from "../../API/mocks/users";
 
 // import * as Yup from "yup";
 // import {

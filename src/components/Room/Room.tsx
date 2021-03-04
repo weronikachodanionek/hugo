@@ -1,11 +1,12 @@
 import React from "react";
 import classnames from "classnames";
 
-import { IDesk, IRoom } from "../../API/types";
-import styles from "./Room.module.scss";
-import Point from "../Point/Point";
-import { useReservationActionsContext } from "../../Context/ReservationContext";
+import { Point } from "..";
 import { Button } from "../common";
+
+import styles from "./Room.module.scss";
+import { IDesk, IRoom } from "../../API/types";
+import { useReservationActionsContext } from "../../Context/ReservationContext";
 import { useCollapseActionsContext } from "../../Context/ReservationCollapseContext";
 
 export interface IRoomProps {
@@ -62,18 +63,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
                 </div>
               </Point>
             ) : (
-              <Point className="icon-available">
-                {/* <div className={classnames("text-center", styles.tooltip)}>
-                   <span
-                    onClick={() =>
-                      handleSetChosenPlace(room.roomName, desk.deskName)
-                    }
-                    className="font-weight-normal text-primary text-uppercase"
-                  >
-                    Zarezerwuj
-                  </span> 
-               
-                </div> */}
+              <Point className="icon-available">               
                 <Button
                   onClick={() => handleSetChosenPlace(room.id, desk.id)}
                   className="btn-pink"

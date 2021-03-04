@@ -1,21 +1,16 @@
 import React from "react";
+import moment from "moment";
 import classnames from "classnames";
 
 import styles from "./Users.module.scss";
 import { IDailyUsers } from "../../API/mocks/usersPerDay";
+import { IUser, LocationType } from "../../API/mocks/users";
 import { useReservationContext } from "../../Context/ReservationContext";
 import { useDataContext } from "../../Context/DataContext";
-import { IUser, LocationType } from "../../API/mocks/users";
-import moment from "moment";
 
 const Users: React.FC = () => {
-  const { user, day } = useReservationContext();
+  const { day } = useReservationContext();
   const { users } = useDataContext();
-
-  const addedUser: any = [];
-  users.forEach(function (element) {
-    addedUser.push({ label: user, value: element });
-  });
 
   return (
     <div
@@ -47,7 +42,7 @@ const Users: React.FC = () => {
                       styles.usersPoint,
                       "ml-2 bi bi-circle-fill icon-available"
                     )}
-                  ></i>
+                  ></i>                 
                 </div>
               )}
             </React.Fragment>

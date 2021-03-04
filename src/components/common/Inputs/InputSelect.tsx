@@ -1,11 +1,10 @@
 import React from "react";
-
 import Select, { components } from "react-select";
 
 import { SelectComponentsProps } from "react-select/src/Select";
 
-import { ISelectOptions } from "../../Reservation/Options";
 import "./InputSelect.scss";
+import { ISelectOptions } from "../../Reservation/Options";
 
 export interface ISelectInputProps extends SelectComponentsProps {
   label: string;

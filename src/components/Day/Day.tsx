@@ -1,9 +1,10 @@
 import React from "react";
 import classnames from "classnames";
 
+import { Room } from "..";
+
 import styles from "./Day.module.scss";
 import { IDay, IRoom } from "../../API/types";
-import Room from "../Room/Room";
 interface IDayProps {
   data: IDay;
 }

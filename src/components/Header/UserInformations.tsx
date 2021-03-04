@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import classnames from "classnames";
-
 import { useForm } from "react-hook-form";
 
+import { Button, InputText } from "../common";
+
 import styles from "./UserInformations.module.scss";
-import InputText from "../common/Inputs/TextInput";
 import useLocalStorage from "../../Hooks/useLocalStorage";
-import { Button } from "../common";
 
 type UserField = {
   userName: string;

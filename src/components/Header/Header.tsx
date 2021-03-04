@@ -1,8 +1,9 @@
 import React from "react";
 import classnames from "classnames";
 
-import styles from "./Header.module.scss";
 import UserInformation from "./UserInformations";
+
+import styles from "./Header.module.scss";
 
 const Header: React.FC = () => {
   return (

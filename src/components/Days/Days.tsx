@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import moment from "moment";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+
+import { Day } from "..";
 
 import "react-tabs/style/react-tabs.scss";
 import "./Days.scss";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import { IDay } from "../../API/types";
-import Day from "../Day/Day";
 import { useDataContext } from "../../Context/DataContext";
 import { useReservationContext } from "../../Context/ReservationContext";
-
-
 
 const Days: React.FC = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
