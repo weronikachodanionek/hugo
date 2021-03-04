@@ -75,9 +75,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
                
                 </div> */}
                 <Button
-                  onClick={() =>
-                    handleSetChosenPlace(room.id, desk.id)
-                  }
+                  onClick={() => handleSetChosenPlace(room.id, desk.id)}
                   className="btn-pink"
                 >
                   Zarezerwuj

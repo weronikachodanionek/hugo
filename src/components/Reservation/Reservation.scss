@@ -24,6 +24,13 @@ $size-arrow: 26px;
   height: 100vh;
 }
 
+.reservation-required{
+  color: $red;
+  font-size: 12px;
+  margin-left: 20px;
+  font-weight: 300;
+}
+
 .calendar {
   padding: 40px 20px;
   margin-top: 5px;

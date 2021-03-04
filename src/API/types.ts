@@ -6,8 +6,6 @@ export enum AvailabilityType {
 export interface IDay {
   id: string;
   dayName: string;
-  // date: Date;
-  //moment js
   date: string;
   rooms: IRoom[];
 }
@@ -23,4 +21,9 @@ export interface IDesk {
   deskName: string;
   user?: string;
   available?: string;
+}
+
+export interface IUsername {
+  id: string;
+  userName: string;
 }

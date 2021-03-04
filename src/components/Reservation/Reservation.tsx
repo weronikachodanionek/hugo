@@ -3,29 +3,45 @@ import SimpleReactCalendar from "simple-react-calendar";
 import { Collapse } from "react-collapse";
 
 import "./Reservation.scss";
-import { ISelectOptions, roomsData } from "./Options";
+import { ISelectOptions, roomsData, usersData } from "./Options";
 import InputSelect from "../common/Inputs/InputSelect";
 import {
   useReservationActionsContext,
   useReservationContext,
 } from "../../Context/ReservationContext";
-import { AvailabilityType, IDay, IDesk, IRoom } from "../../API/types";
-import InputText from "../common/Inputs/TextInput";
+import {
+  AvailabilityType,
+  IDay,
+  IDesk,
+  IRoom,
+  IUsername,
+} from "../../API/types";
 import {
   useDataActionsContext,
   useDataContext,
 } from "../../Context/DataContext";
 import { Button } from "../common";
-import useLocalStorage from "../../Hooks/useLocalStorage";
 import {
   useCollapseActionsContext,
   useCollapseContext,
 } from "../../Context/ReservationCollapseContext";
-import Table from "./Table";
 import moment from "moment";
+import { IDailyUsers } from "../../API/mocks/usersPerDay";
+import { IUser, LocationType } from "../../API/mocks/users";
+
+// import * as Yup from "yup";
+// import {
+//   IReservationValues,
+//   reservationForm,
+//   sendReservation,
+// } from "./ReservationValues";
 
 const Reservation: React.FC = () => {
-  const [yourName] = useLocalStorage("", "");
+  // const ReservationSchema = Yup.object().shape({
+  //   UserId: Yup.string().required("Required"),
+  //   RoomId: Yup.string().required("Required"),
+  //   DeskId: Yup.string().required("Required"),
+  // });
 
   const { collapseReservation, visibleButton } = useCollapseContext();
   const {
@@ -34,16 +50,27 @@ const Reservation: React.FC = () => {
   } = useCollapseActionsContext();
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
-  const { room, desk, user, day: contextDay } = useReservationContext();
-  const { data } = useDataContext();
-  const { setData } = useDataActionsContext();
+  const {
+    room,
+    desk,
+    user: contextUser,
+    day: contextDay,
+  } = useReservationContext();
+  const { data, users } = useDataContext();
+  const { setData, setUsers } = useDataActionsContext();
 
   const [roomValue, setRoomValue] = useState<ISelectOptions>();
   const [deskValue, setDeskValue] = useState<ISelectOptions>();
+  const [userValue, setUserValue] = useState<ISelectOptions>();
 
   const roomsOptions: ISelectOptions[] = roomsData.map((room: IRoom) => ({
     label: room.roomName,
     value: room.id,
+  }));
+
+  const usersOptions: ISelectOptions[] = usersData.map((user: IUsername) => ({
+    label: user.userName,
+    value: user.id,
   }));
 
   const [desks, setDesks] = useState<ISelectOptions[]>([]);
@@ -62,8 +89,18 @@ const Reservation: React.FC = () => {
     const roomData: IRoom | undefined = roomsData.find(
       (data: IRoom) => data.id === room
     );
+
+    // const userData: IUsername | undefined = usersData.find(
+    //   (data: IUsername) => data.id === user
+    // );
+
     setRoomValue(
       roomsOptions.find((option: ISelectOptions) => option.value === room)
+    );
+    setUserValue(
+      usersOptions.find(
+        (option: ISelectOptions) => option.value === contextUser
+      )
     );
     setDesks(
       roomData?.desks.map((desk: IDesk) => ({
@@ -74,11 +111,35 @@ const Reservation: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
+  // const initialValues: IReservationValues = {
+  //   UserId: user,
+  //   RoomId: room,
+  //   DeskId: desk,
+  // };
+
+  // const formik = useFormik({
+  //   initialValues: initialValues,
+  //   validationSchema: ReservationSchema,
+
+  //   onSubmit: (values) => {
+  //     console.log("ppp", values);
+  //     handleReservation();
+  //     console.log("zarezerwowano biurko", formik.values.UserId);
+
+  //     sendReservation(reservationForm(values));
+  //     // setShowSuccessInf(true);
+  //     formik.resetForm();
+
+  //     // setTimeout(() => {
+  //     //   setShowSuccessInf(false);
+  //     // }, 3000);
+  //   },
+  // });
+
   const handleReservation = () => {
-    const temp: IDay[] = data.map((day: IDay) =>
-      moment(day.date).isSame(contextDay, 'day')
-        ? 
-         {
+    const tempDay: IDay[] = data.map((day: IDay) =>
+      moment(day.date).isSame(contextDay, "day")
+        ? {
             ...day,
             rooms: day.rooms.map((room: IRoom) => ({
               ...room,
@@ -86,23 +147,43 @@ const Reservation: React.FC = () => {
                 deskData.id === desk
                   ? {
                       ...deskData,
-                      user: user,
+                      user: contextUser,
                       available: AvailabilityType.unavailable,
                     }
                   : { ...deskData }
               ),
             })),
           }
-
-          : {
+        : {
             ...day,
           }
     );
 
-    setData(temp);
+    const tempUsers: IDailyUsers[] = users.map((dailyUser: IDailyUsers) =>
+      moment(dailyUser.date).isSame(contextDay, "day")
+        ? {
+            ...dailyUser,
+            users: dailyUser.users.map((user: IUser) =>
+              user.name === contextUser
+                ? {
+                    ...user,
+                    location: LocationType.office,
+                  }
+                : { ...user }
+            ),
+          }
+        : {
+            ...dailyUser,
+          }
+    );
+
+    setData(tempDay);
+    setUsers(tempUsers);
     setCollapseReservation(false);
     setVisibileButton(false);
   };
+
+  //const [showSuccessInf, setShowSuccessInf] = useState(false);
 
   return (
     <div className="bg-gray pt-5 pb-5 col">
@@ -111,8 +192,6 @@ const Reservation: React.FC = () => {
           Zarezerwuj biurko
         </Button>
       </div>
-      <p>{desk}</p>
-      <p>{room}</p>
 
       {collapseReservation === true && (
         <Collapse isOpened={collapseReservation}>
@@ -122,14 +201,27 @@ const Reservation: React.FC = () => {
                 className="bi bi-x reservation-close d-flex justify-content-end"
                 onClick={() => handleButtonBehavior()}
               ></i>
-              <form>
-                <InputText
-                  inputId="userId"
+              <form onSubmit={() => handleReservation()}>
+                {/* <InputText
+                  inputId="UserId"
                   label="Podaj swoje imię"
                   name="User"
                   value={user}
-                  placeholder={yourName}
+                  placeholder="Podaj swoje imię"
                   onChange={(e: any) => setUser(e.target.value)}
+                /> */}
+
+                {/* {formik.errors.UserId && (
+                  <p className="reservation-required">* pole wymagane</p>
+                )} */}
+
+                <InputSelect
+                  inputId="UserId"
+                  label="Podaj swoje imię"
+                  options={usersOptions}
+                  placeholder="Podaj swoje imię"
+                  onChange={(option: ISelectOptions) => setUser(option.label)}
+                  value={userValue}
                 />
 
                 <InputSelect
@@ -140,6 +232,9 @@ const Reservation: React.FC = () => {
                   onChange={(option: ISelectOptions) => setRoom(option.value)}
                   value={roomValue}
                 />
+                {/* {formik.errors.RoomId && (
+                  <p className="reservation-required">* pole wymagane</p>
+                )} */}
 
                 <InputSelect
                   inputId="DeskId"
@@ -149,6 +244,9 @@ const Reservation: React.FC = () => {
                   onChange={(option: ISelectOptions) => setDesk(option.value)}
                   value={deskValue}
                 />
+                {/* {formik.errors.DeskId && (
+                  <p className="reservation-required">* pole wymagane</p>
+                )} */}
 
                 <div className="input-label">Wybierz datę</div>
 
@@ -170,10 +268,7 @@ const Reservation: React.FC = () => {
 
                 <div className="w-100 d-flex justify-content-center align-content-center">
                   {collapseReservation === true && (
-                    <Button
-                      className="btn btn-violet"
-                      onClick={handleReservation}
-                    >
+                    <Button className="btn btn-violet" type="submit">
                       Zarezerwuj biurko
                     </Button>
                   )}

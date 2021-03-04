@@ -39,6 +39,7 @@ const InputSelect: React.FC<ISelectInputProps> = ({
         </label>
         <Select
           label={label}
+          rules={{ required: 'Please select an option'}}
           placeholder={placeholder}
           options={options}
           inputId={inputId}
@@ -46,6 +47,7 @@ const InputSelect: React.FC<ISelectInputProps> = ({
           className="react-select-container"
           components={{ DropdownIndicator }}
           {...props}
+          
         />
       </div>
     </>
