@@ -41,6 +41,7 @@ const Days: React.FC = () => {
               <Day data={day} />
             </TabPanel>
           ))}
+
         </Tabs>
       </div>
     </div>

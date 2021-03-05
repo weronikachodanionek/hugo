@@ -6,7 +6,7 @@ import { Button } from "../common";
 
 import styles from "./Room.module.scss";
 import { IDesk, IRoom } from "../../API/types";
-import { useReservationActionsContext } from "../../Context/ReservationContext";
+import { useReservationActionsContext, useReservationContext } from "../../Context/ReservationContext";
 import { useCollapseActionsContext } from "../../Context/ReservationCollapseContext";
 
 export interface IRoomProps {
@@ -14,16 +14,18 @@ export interface IRoomProps {
 }
 
 const Room: React.FC<IRoomProps> = ({ room }) => {
-  const { setDesk, setRoom } = useReservationActionsContext();
+  const { day } = useReservationContext();
+  const { setDesk, setRoom, setDay } = useReservationActionsContext();
 
   const {
     setCollapseReservation,
     setVisibileButton,
   } = useCollapseActionsContext();
 
-  const handleSetChosenPlace = (room: string, desk: string) => {
+  const handleSetChosenPlace = (room: string, desk: string, day: Date) => {
     setDesk(desk);
     setRoom(room);
+    setDay(day)
     setCollapseReservation(true);
     setVisibileButton(false);
     window.scroll({
@@ -65,7 +67,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
             ) : (
               <Point className="icon-available">               
                 <Button
-                  onClick={() => handleSetChosenPlace(room.id, desk.id)}
+                  onClick={() => handleSetChosenPlace(room.id, desk.id, day)}
                   className="btn-pink"
                 >
                   Zarezerwuj
@@ -75,6 +77,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
           </div>
         ))}
       </div>
+
     </>
   );
 };
