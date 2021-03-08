@@ -17,20 +17,7 @@ const Statistics: React.FC = () => {
 
   const [workHome, setWorkHome] = useState<number>(0);
   const [workOffice, setWorkOffice] = useState<number>(0);
-  const {
-    setCollapseReservation,
-    setVisibileButton,
-  } = useCollapseActionsContext();
-
-  const handleOpenReservation = () => {
-    setCollapseReservation(true);
-    setVisibileButton(false);
-    window.scroll({
-      top: 660,
-      left: 0,
-      behavior: "smooth",
-    });
-  };
+  useCollapseActionsContext();
 
   const workEverywhere = users.find((dailyUser: IDailyUsers) =>
     moment(dailyUser.date).isSame(day, "day")
@@ -53,14 +40,14 @@ const Statistics: React.FC = () => {
   const freeDesks = integerNumberOfDesks - workOffice;
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center bg-gray pb-5">
+    <div className="d-flex flex-column justify-content-center align-items-center bg-gray pb-5 col-12">
       {workOffice > 0 ? (
         <>
-          <div className="d-flex justify-content-center align-items-center">
+          <div className="d-flex justify-content-center align-items-center row">
             <PieChart
               paddingAngle={0}
-              className="col-5"
               label={({ dataEntry }) => `${Math.round(dataEntry.percentage)} %`}
+              className="col-5"
               data={[
                 {
                   title: "Zdalnie",
@@ -79,7 +66,7 @@ const Statistics: React.FC = () => {
               })}
               center={[50, 50]}
             />
-            <div className="d-flex flex-column">
+            <div className="d-flex flex-column col-5">
               <div className="d-flex align-items-center ml-3">
                 <div
                   className={classnames(styles.statisticsPoint, "bg-green")}
@@ -116,16 +103,9 @@ const Statistics: React.FC = () => {
               "text-align font-weight-light mt-5"
             )}
           >
-            Na wybrany dzień pozostało{" "}
+            Na wybrany dzień pozostało
             <span className="font-weight-bold">{freeDesks}</span> wolnych
-            biurek.{" "}
-            <span
-              className="font-weight-bold"
-              onClick={() => handleOpenReservation()}
-            >
-              Zarezeruj
-            </span>{" "}
-            jedno z nich
+            biurek.
           </div>
         </>
       ) : (

@@ -9,14 +9,12 @@ import { IDailyUsers } from "../../API/mocks/usersPerDay";
 import moment from "moment";
 import { IUser } from "../../API/mocks/users";
 import { useDataContext } from "../../Context/DataContext";
-import { roomsData } from "../Reservation/Options";
 interface IDayProps {
   data: IDay;
 }
 
 const Day: React.FC<IDayProps> = ({ data }) => {
   const { users } = useDataContext();
-  console.log("xxx", users);
 
   return (
     <>
@@ -25,7 +23,7 @@ const Day: React.FC<IDayProps> = ({ data }) => {
           <div className="row">
             {data.rooms?.map((room: IRoom) => (
               <div
-                className="col-sm-12 col-md-6 position-relative px-4 pb-3"
+                className="col-sm-12 col-md-6 position-relative pb-3"
                 key={room.id}
               >
                 <h4 className={classnames(styles.roomName)}>{room.roomName}</h4>
@@ -33,31 +31,34 @@ const Day: React.FC<IDayProps> = ({ data }) => {
               </div>
             ))}
 
-
             <div
               className={classnames(
                 styles.users,
-                "d-flex justify-content-center align-items-center bg-gray flex-wrap flex-column col mt-4"
+                "d-flex bg-gray flex-wrap flex-column col mt-4"
               )}
             >
-              <h4 className={classnames(styles.usersHeader, "pb-4 col-10")}>
+              <h4 className={classnames(styles.usersHeader, "pb-4")}>
                 Wybranego w biurze obecni są:
               </h4>
 
-              <div className="d-flex justify-content-start align-items-center col-10 flex-wrap">
+              <div className="d-flex justify-content-start align-items-center flex-wrap">
                 {users
                   ?.find((dailyUsers: IDailyUsers) =>
                     moment(dailyUsers.date).isSame(data.date, "day")
                   )
                   ?.users.map((user: IUser, key) => (
-                    <Users user={user} />
+                    <>
+                      <Users user={user} />
+                    </>
                   ))}
               </div>
             </div>
           </div>
         </div>
       </div>
-      <Statisic /> 
+      <div className="row">
+        <Statisic />
+      </div>
     </>
   );
 };
