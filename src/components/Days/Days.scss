@@ -1,5 +1,4 @@
 .calender {
-  padding-bottom: 80px;
   box-sizing: border-box;
   overflow-y: hidden;
 }
@@ -27,18 +26,8 @@
   border: none;
   border-radius: 0;
   outline: none;
-  opacity: 0.6;
+  opacity: 0.7;
 
-  &:first-child{
-    font-size: 16px;
-    opacity: 1;
-    font-weight: 500;
-  }
-}
-
-.react-tabs-today{
-  font-weight: 300;
-  color: $dark;  
 }
 
 .react-tabs__tab--selected {
@@ -46,4 +35,25 @@
   color: $primary;
   background-color: transparent;
   font-weight: 400;
+  opacity: 1;
+}
+
+.slider-arrows {
+  top: 30px;  
+  font-size: 20px;
+  background-color: $gray--light;
+}
+
+.slider-left-arrow {
+  left: 110px;
+  z-index: 4;
+}
+
+.slider-right-arrow {
+  right: 110px;
+}
+
+.slick-slider{
+border: none !important;
+outline: none !important
 }

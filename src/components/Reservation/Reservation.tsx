@@ -27,7 +27,7 @@ import {
 } from "../../Context/ReservationContext";
 import {
   useCollapseActionsContext,
-  useCollapseContext,  
+  useCollapseContext,
 } from "../../Context/ReservationCollapseContext";
 
 // import * as Yup from "yup";
@@ -203,19 +203,6 @@ const Reservation: React.FC = () => {
                 onClick={() => handleButtonBehavior()}
               ></i>
               <form onSubmit={() => handleReservation()}>
-                {/* <InputText
-                  inputId="UserId"
-                  label="Podaj swoje imię"
-                  name="User"
-                  value={user}
-                  placeholder="Podaj swoje imię"
-                  onChange={(e: any) => setUser(e.target.value)}
-                /> */}
-
-                {/* {formik.errors.UserId && (
-                  <p className="reservation-required">* pole wymagane</p>
-                )} */}
-
                 <InputSelect
                   inputId="UserId"
                   label="Podaj swoje imię"
@@ -269,7 +256,11 @@ const Reservation: React.FC = () => {
 
                 <div className="w-100 d-flex justify-content-center align-content-center">
                   {collapseReservation === true && (
-                    <Button className="btn btn-violet" type="submit">
+                    <Button
+                      className="btn btn-violet"
+                      type="submit"
+                      //onSubmit={() => handleReservation()}
+                    >
                       Zarezerwuj biurko
                     </Button>
                   )}

@@ -5,6 +5,7 @@ export enum AvailabilityType {
 
 export interface IDay {
   id: string;
+  tabIndex?: number;
   dayName: string;
   date: string;
   rooms: IRoom[];

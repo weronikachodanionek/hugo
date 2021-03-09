@@ -40,7 +40,7 @@ const Statistics: React.FC = () => {
   const freeDesks = integerNumberOfDesks - workOffice;
 
   return (
-    <div className="d-flex flex-column justify-content-center align-items-center bg-gray pb-5 col-12">
+    <div className="d-flex flex-column justify-content-center align-items-center pb-5 col-12">
       {workOffice > 0 ? (
         <>
           <div className="d-flex justify-content-center align-items-center row">
@@ -109,6 +109,8 @@ const Statistics: React.FC = () => {
           </div>
         </>
       ) : (
+        <div className="d-flex flex-column align-items-center">
+          <i className={classnames(styles.statisticIconHouse, "bi bi-house-door")}></i>
         <p
           className={classnames(
             styles.statisticInformation,
@@ -117,6 +119,7 @@ const Statistics: React.FC = () => {
         >
           Dziś wszyscy pracują w domu, biuro jest puste
         </p>
+        </div>
       )}
     </div>
   );

@@ -28,4 +28,18 @@ export const DailyUsers: IDailyUsers[] = [
       location: LocationType.home
     }))
   },
+  {
+    date: moment().add(3, "days").format(),
+    users: users.map((user: IUser) => ({
+      ...user,
+      location: LocationType.home
+    }))
+  },
+  {
+    date: moment().add(4, "days").format(),
+    users: users.map((user: IUser) => ({
+      ...user,
+      location: LocationType.home
+    }))
+  },
 ];

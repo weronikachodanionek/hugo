@@ -91,7 +91,10 @@ $size-arrow: 26px;
 .calendar-week {
   display: flex;
   justify-content: space-between;
+ 
 }
+
+
 
 .calendar-week-day {
   flex: 1;
@@ -104,10 +107,13 @@ $size-arrow: 26px;
   height: $size-circle;
   border: 1px solid transparent;
 
+
+
   &:hover {
     border: 1px dashed rgba(255, 255, 255, 0.7);
     border-radius: 50%;
   }
+
 
   &.is-today {
     width: $size-circle;
@@ -129,7 +135,15 @@ $size-arrow: 26px;
       border-radius: 50%;
     }
   }
+
+  &.is-selected,
+  &.is-highlighted{
+    border: 2px solid red !important;
+    background-color: antiquewhite  !important;
+  }
+  
 }
+
 
 .ReactCollapse--collapse {
   width: 100%;

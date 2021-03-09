@@ -34,7 +34,7 @@ const Day: React.FC<IDayProps> = ({ data }) => {
             <div
               className={classnames(
                 styles.users,
-                "d-flex bg-gray flex-wrap flex-column col mt-4"
+                "d-flex flex-wrap flex-column col mt-4"
               )}
             >
               <h4 className={classnames(styles.usersHeader, "pb-4")}>
@@ -47,9 +47,7 @@ const Day: React.FC<IDayProps> = ({ data }) => {
                     moment(dailyUsers.date).isSame(data.date, "day")
                   )
                   ?.users.map((user: IUser, key) => (
-                    <>
-                      <Users user={user} />
-                    </>
+                    <Users user={user} key={key} />
                   ))}
               </div>
             </div>

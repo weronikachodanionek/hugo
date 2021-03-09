@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
+import Slider from "react-slick";
 
 import { Button, InputText } from "../common";
 
@@ -13,10 +14,8 @@ type UserField = {
 };
 
 const UserInformation: React.FC = () => {
-  const { register, handleSubmit, watch, errors } = useForm<UserField>();
+  const { register, handleSubmit, errors } = useForm<UserField>();
   const onSubmit = (data: any) => console.log(data);
-
-  console.log(watch("userName"));
 
   const [showUserPanel, setUserPanelShow] = useState<Boolean>(false);
   const [showLogin, setLogin] = useState<Boolean>(true);

@@ -1,50 +1,114 @@
 import React, { useState } from "react";
-import moment from "moment";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import Slider from "react-slick";
 
 import { Day } from "..";
 
 import "react-tabs/style/react-tabs.scss";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import "./Days.scss";
 import { IDay } from "../../API/types";
 import { useDataContext } from "../../Context/DataContext";
-import { useReservationContext } from "../../Context/ReservationContext";
+
+function SampleNextArrow(props: any) {
+  const { onClick } = props;
+  return (
+    <i
+      onClick={onClick}
+      className="bi bi-arrow-right-circle position-absolute slider-arrows slider-right-arrow"
+    ></i>
+  );
+}
+
+function SamplePrevArrow(props: any) {
+  const { onClick } = props;
+  return (
+    <i
+      onClick={onClick}
+      className="bi bi-arrow-left-circle position-absolute slider-arrows slider-left-arrow"
+    ></i>
+  );
+}
 
 const Days: React.FC = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const { data } = useDataContext();
-  const { day } = useReservationContext();
+
+  const thisWeek = data.slice(0, 5);
+  const nextWeek = data.slice(5, 10);
+
+  const settings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    //fade: true,
+    nextArrow: <SampleNextArrow />,
+    prevArrow: <SamplePrevArrow />,
+  };
 
   return (
-    <div
-      className={
-        "calender bg-gray d-flex justify-content-center align-items-start"
-      }
-    >
-      <div className="col-10">
-        <Tabs
-          selectedIndex={tabIndex}
-          onSelect={(index: number) => setTabIndex(index)}
-          key={tabIndex}
-        >
-          <TabList>
-            <Tab>
-              <span className="react-tabs-today">dziś jest: </span>
-              {moment(day).locale("pl").format("dddd DD.MM")}
-            </Tab>
-            <Tab> {moment(day).add(1, "days").format("dddd DD.MM")} </Tab>
-            <Tab> {moment(day).add(2, "days").format("dddd DD.MM")} </Tab>
-          </TabList>
+    <>
+      <Slider {...settings} className="slider-tabs d-flex  position-relative">
+        <div>
+          <div
+            className={
+              "calender d-flex justify-content-center align-items-start bg-gray"
+            }
+          >
+            <div className="col-10">
+              <Tabs
+                selectedIndex={tabIndex}
+                onSelect={(index: number) => setTabIndex(index)}
+                key={tabIndex}
+              >
+                <TabList>
+                  {thisWeek.map((day: IDay) => (
+                    <Tab key={day.id}>{day.dayName}</Tab>
+                  ))}
+                </TabList>
 
-          {data.map((day: IDay) => (
-            <TabPanel key={day.id}>
-              <Day data={day} />
-            </TabPanel>
-          ))}
+                {thisWeek.map((day: IDay) => (
+                  <TabPanel key={day.id} tabIndex={day.tabIndex}>
+                    <Day data={day} key={day.id} />
+                  </TabPanel>
+                ))}
+              </Tabs>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div
+            className={
+              "calender d-flex justify-content-center align-items-start bg-gray"
+            }
+          >
+            <div className="col-10">
+              <Tabs
+                selectedIndex={tabIndex}
+                onSelect={(index: number) => setTabIndex(index)}
+                key={tabIndex}
+              >
+                <TabList>
+                  {nextWeek.map((day: IDay) => (
+                    <Tab key={day.id}>{day.dayName}</Tab>
+                  ))}
+                </TabList>
 
-        </Tabs>
-      </div>
-    </div>
+                {nextWeek.map((day: IDay) => (
+                  <TabPanel key={day.id} tabIndex={day.tabIndex}>
+                    <Day data={day} key={day.id} />
+                  </TabPanel>
+                ))}
+              </Tabs>
+            </div>
+          </div>
+        </div>
+      </Slider>
+    </>
   );
 };
 
