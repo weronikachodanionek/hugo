@@ -11,6 +11,8 @@ import "slick-carousel/slick/slick-theme.css";
 import "./Days.scss";
 import { IDay } from "../../API/types";
 import { useDataContext } from "../../Context/DataContext";
+import { useReservationActionsContext } from "../../Context/ReservationContext";
+import moment from "moment";
 
 function SampleNextArrow(props: any) {
   const { onClick } = props;
@@ -35,6 +37,7 @@ function SamplePrevArrow(props: any) {
 const Days: React.FC = () => {
   const [tabIndex, setTabIndex] = useState<number>(0);
   const { data } = useDataContext();
+  const { setDay } = useReservationActionsContext();
 
   const thisWeek = data.slice(0, 5);
   const nextWeek = data.slice(5, 10);
@@ -49,6 +52,12 @@ const Days: React.FC = () => {
     prevArrow: <SamplePrevArrow />,
   };
 
+  const handleSelect = (i: number): void => {
+    setDay(
+      moment(data.find((day: IDay) => day.tabIndex === i)?.date).toDate()
+    );
+    setTabIndex(i);
+  };
   return (
     <>
       {data && (
@@ -62,7 +71,7 @@ const Days: React.FC = () => {
               <div className="col-10">
                 <Tabs
                   selectedIndex={tabIndex}
-                  onSelect={(index: number) => setTabIndex(index)}
+                  onSelect={handleSelect}
                   key={tabIndex}
                 >
                   <TabList>
@@ -89,7 +98,7 @@ const Days: React.FC = () => {
               <div className="col-10">
                 <Tabs
                   selectedIndex={tabIndex}
-                  onSelect={(index: number) => setTabIndex(index)}
+                  onSelect={handleSelect}
                   key={tabIndex}
                 >
                   <TabList>

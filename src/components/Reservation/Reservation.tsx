@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { EventHandler, FormEventHandler, useEffect, useState } from "react";
 import moment from "moment";
 import SimpleReactCalendar from "simple-react-calendar";
 
@@ -25,17 +25,17 @@ import {
 } from "../../Context/ReservationContext";
 
 export interface IReservationModal {
-  closeModal: () => void; 
+  closeModal: () => void;
 }
 
 const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
-  
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
   const {
     room,
     desk,
     user: contextUser,
     day: contextDay,
+    tabDay
   } = useReservationContext();
   const { data, users } = useDataContext();
   const { setData, setUsers } = useDataActionsContext();
@@ -83,7 +83,8 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
-  const handleReservation = () => {
+  const handleReservation = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     const tempDay: IDay[] = data.map((day: IDay) =>
       moment(day.date).isSame(contextDay, "day")
         ? {
@@ -126,6 +127,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
 
     setData(tempDay);
     setUsers(tempUsers);
+    closeModal();
   };
 
   return (
@@ -134,7 +136,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         onClick={closeModal}
         className="bi bi-x reservation-close d-flex justify-content-end"
       ></i>
-      <form onSubmit={() => handleReservation()}>
+      <form onSubmit={handleReservation}>
         <InputSelect
           inputId="UserId"
           label="Podaj swoje imię"
@@ -178,6 +180,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
             <i className="calendar-header_button bi bi-arrow-right-short"></i>
           }
           activeMonth={new Date()}
+          selected={contextDay}
         />
 
         <div className="d-flex justify-content-center">

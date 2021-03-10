@@ -6,7 +6,10 @@ import { Button } from "../common";
 
 import styles from "./Room.module.scss";
 import { IDesk, IRoom } from "../../API/types";
-import { useReservationActionsContext, useReservationContext } from "../../Context/ReservationContext";
+import {
+  useReservationActionsContext,
+  useReservationContext,
+} from "../../Context/ReservationContext";
 import { useCollapseActionsContext } from "../../Context/ReservationCollapseContext";
 import ModalReservation from "../Reservation/Modal";
 
@@ -26,7 +29,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
   const handleSetChosenPlace = (room: string, desk: string, day: Date) => {
     setDesk(desk);
     setRoom(room);
-    setDay(day)
+    setDay(day);
     setCollapseReservation(true);
     setVisibileButton(false);
     window.scroll({
@@ -66,7 +69,7 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
                 </div>
               </Point>
             ) : (
-              <Point className="icon-available">               
+              <Point className="icon-available">
                 {/* <Button
                   onClick={() => handleSetChosenPlace(room.id, desk.id, day)}
                   className="btn-pink"
@@ -74,13 +77,16 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
                   Zarezerwuj
                 </Button> */}
 
-                <ModalReservation handleModalReservation={() => handleSetChosenPlace(room.id, desk.id, day)}></ModalReservation>
+                <ModalReservation
+                  handleModalReservation={() =>
+                    handleSetChosenPlace(room.id, desk.id, day)
+                  }
+                ></ModalReservation>
               </Point>
             )}
           </div>
         ))}
       </div>
-
     </>
   );
 };
