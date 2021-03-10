@@ -8,6 +8,7 @@ import styles from "./Room.module.scss";
 import { IDesk, IRoom } from "../../API/types";
 import { useReservationActionsContext, useReservationContext } from "../../Context/ReservationContext";
 import { useCollapseActionsContext } from "../../Context/ReservationCollapseContext";
+import ModalReservation from "../Reservation/Modal";
 
 export interface IRoomProps {
   room: IRoom;
@@ -66,12 +67,14 @@ const Room: React.FC<IRoomProps> = ({ room }) => {
               </Point>
             ) : (
               <Point className="icon-available">               
-                <Button
+                {/* <Button
                   onClick={() => handleSetChosenPlace(room.id, desk.id, day)}
                   className="btn-pink"
                 >
                   Zarezerwuj
-                </Button>
+                </Button> */}
+
+                <ModalReservation handleModalReservation={() => handleSetChosenPlace(room.id, desk.id, day)}></ModalReservation>
               </Point>
             )}
           </div>

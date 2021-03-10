@@ -1,26 +1,29 @@
 import React from "react";
 import moment from "moment";
+import { ModalProvider } from "react-modal-hook";
 
-import styles from "./App.scss";
+import styles from "./App.module.scss";
 import "../src/assets/styles/index.scss";
 import { ReservationContextProvider } from "./Context/ReservationContext";
-import { Calender, Header, Reservation } from "./components";
+import { Calender, Header } from "./components";
 import { DataContextProvider } from "./Context/DataContext";
 import { CollapseContextProvider } from "./Context/ReservationCollapseContext";
+import ModRes from "./components/Reservation/Modal";
 
 moment.locale("pl");
 
 const App: React.FC = () => {
-
   return (
     <ReservationContextProvider>
       <DataContextProvider>
         <CollapseContextProvider>
-          <div className={styles.app}>
-            <Header />
-            <Reservation />
-            <Calender />
-          </div>
+          <ModalProvider>
+            <div className={styles.app}>
+              <Header />
+              <ModRes />
+              <Calender />
+            </div>
+          </ModalProvider>
         </CollapseContextProvider>
       </DataContextProvider>
     </ReservationContextProvider>

@@ -1,0 +1,32 @@
+import ReactModal from "react-modal";
+import { useModal } from "react-modal-hook";
+import { Reservation } from "..";
+import { Button } from "../common";
+
+import "./Reservation.scss";
+
+interface IModalReservation {
+  handleModalReservation?: () => void;
+}
+
+const ModalReservation: React.FC<IModalReservation> = ({
+  handleModalReservation,
+}) => {
+  const [showModal, hideModal] = useModal(() => {
+    return (
+      <ReactModal isOpen>
+        <Reservation closeModal={hideModal} />
+      </ReactModal>
+    );
+  });
+
+  return (
+    <div className="buttonModal d-flex justify-content-center align-items-center pt-5 pb-5">
+      <Button className="btn btn-violet" onClick={showModal}>
+        Zarezerwuj
+      </Button>
+    </div>
+  );
+};
+
+export default ModalReservation;

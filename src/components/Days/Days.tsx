@@ -45,69 +45,70 @@ const Days: React.FC = () => {
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
-    //fade: true,
     nextArrow: <SampleNextArrow />,
     prevArrow: <SamplePrevArrow />,
   };
 
   return (
     <>
-      <Slider {...settings} className="slider-tabs d-flex  position-relative">
-        <div>
-          <div
-            className={
-              "calender d-flex justify-content-center align-items-start bg-gray"
-            }
-          >
-            <div className="col-10">
-              <Tabs
-                selectedIndex={tabIndex}
-                onSelect={(index: number) => setTabIndex(index)}
-                key={tabIndex}
-              >
-                <TabList>
+      {data && (
+        <Slider {...settings} className="slider-tabs d-flex  position-relative">
+          <div>
+            <div
+              className={
+                "calender d-flex justify-content-center align-items-start bg-gray"
+              }
+            >
+              <div className="col-10">
+                <Tabs
+                  selectedIndex={tabIndex}
+                  onSelect={(index: number) => setTabIndex(index)}
+                  key={tabIndex}
+                >
+                  <TabList>
+                    {thisWeek.map((day: IDay) => (
+                      <Tab key={day.id}>{day.dayName}</Tab>
+                    ))}
+                  </TabList>
+
                   {thisWeek.map((day: IDay) => (
-                    <Tab key={day.id}>{day.dayName}</Tab>
+                    <TabPanel key={day.id} tabIndex={day.tabIndex}>
+                      <Day data={day} key={day.id} />
+                    </TabPanel>
                   ))}
-                </TabList>
-
-                {thisWeek.map((day: IDay) => (
-                  <TabPanel key={day.id} tabIndex={day.tabIndex}>
-                    <Day data={day} key={day.id} />
-                  </TabPanel>
-                ))}
-              </Tabs>
+                </Tabs>
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <div
-            className={
-              "calender d-flex justify-content-center align-items-start bg-gray"
-            }
-          >
-            <div className="col-10">
-              <Tabs
-                selectedIndex={tabIndex}
-                onSelect={(index: number) => setTabIndex(index)}
-                key={tabIndex}
-              >
-                <TabList>
+          <div>
+            <div
+              className={
+                "calender d-flex justify-content-center align-items-start bg-gray"
+              }
+            >
+              <div className="col-10">
+                <Tabs
+                  selectedIndex={tabIndex}
+                  onSelect={(index: number) => setTabIndex(index)}
+                  key={tabIndex}
+                >
+                  <TabList>
+                    {nextWeek.map((day: IDay) => (
+                      <Tab key={day.id}>{day.dayName}</Tab>
+                    ))}
+                  </TabList>
+
                   {nextWeek.map((day: IDay) => (
-                    <Tab key={day.id}>{day.dayName}</Tab>
+                    <TabPanel key={day.id} tabIndex={day.tabIndex}>
+                      <Day data={day} key={day.id} />
+                    </TabPanel>
                   ))}
-                </TabList>
-
-                {nextWeek.map((day: IDay) => (
-                  <TabPanel key={day.id} tabIndex={day.tabIndex}>
-                    <Day data={day} key={day.id} />
-                  </TabPanel>
-                ))}
-              </Tabs>
+                </Tabs>
+              </div>
             </div>
           </div>
-        </div>
-      </Slider>
+        </Slider>
+      )}
     </>
   );
 };

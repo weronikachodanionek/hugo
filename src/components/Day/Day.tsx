@@ -54,9 +54,11 @@ const Day: React.FC<IDayProps> = ({ data }) => {
           </div>
         </div>
       </div>
-      <div className="row">
-        <Statisic />
-      </div>
+      {data && (
+        <div className="row">
+          <Statisic />
+        </div>
+      )}
     </>
   );
 };
