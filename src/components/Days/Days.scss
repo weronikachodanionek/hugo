@@ -15,6 +15,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   border: none;
   margin-bottom: 30px;
 }
@@ -38,18 +39,19 @@
 }
 
 .slider-arrows {
-  top: 30px;
+  top: -12px;
   font-size: 20px;
+  color: $secondary;
   background-color: $gray--light;
 }
 
 .slider-left-arrow {
-  left: 110px;
+  left: 45%;
   z-index: 4;
 }
 
 .slider-right-arrow {
-  right: 110px;
+  right: 45%;
 }
 
 .slick-slider {

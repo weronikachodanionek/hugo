@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import classnames from "classnames";
 import { useForm } from "react-hook-form";
-import Slider from "react-slick";
 
 import { Button, InputText } from "../common";
 

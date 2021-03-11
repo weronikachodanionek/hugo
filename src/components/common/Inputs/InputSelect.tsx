@@ -42,6 +42,7 @@ const InputSelect: React.FC<ISelectInputProps> = ({
           placeholder={placeholder}
           options={options}
           inputId={inputId}
+          required
           classNamePrefix="react-select-custom"
           className="react-select-container"
           components={{ DropdownIndicator }}

@@ -1,47 +1,39 @@
-import moment from "moment";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classnames from "classnames";
 import { PieChart } from "react-minimal-pie-chart";
 
-import { IUser, LocationType } from "../../API/mocks/users";
 import styles from "./Statistics.module.scss";
-import { IDailyUsers } from "../../API/mocks/usersPerDay";
-import { useDataContext } from "../../Context/DataContext";
-import { useReservationContext } from "../../Context/ReservationContext";
-import { integerNumberOfDesks } from "../../services/constants";
-import { useCollapseActionsContext } from "../../Context/ReservationCollapseContext";
+interface IStatistic {
+  workOffice: number;
+  workHome: number;
+  freeDesks: number;
+}
 
-const Statistics: React.FC = () => {
-  const { users } = useDataContext();
-  const { day } = useReservationContext();
-
-  const [workHome, setWorkHome] = useState<number>(0);
-  const [workOffice, setWorkOffice] = useState<number>(0);
-  useCollapseActionsContext();
-
-  const workEverywhere = users.find((dailyUser: IDailyUsers) =>
-    moment(dailyUser.date).isSame(day, "day")
-  );
-
-  useEffect(() => {
-    setWorkHome(
-      workEverywhere
-        ? workEverywhere?.users.filter(
-            (user: IUser) => user.location === LocationType.home
-          ).length
-        : 0
-    );
-  }, [users, workEverywhere]);
-
-  useEffect(() => {
-    setWorkOffice(workEverywhere ? workEverywhere?.users.length - workHome : 0);
-  }, [users, workEverywhere, workHome]);
-
-  const freeDesks = integerNumberOfDesks - workOffice;
-
+const Statistics: React.FC<IStatistic> = ({
+  workOffice,
+  workHome,
+  freeDesks,
+}) => {
   return (
     <div className="d-flex flex-column justify-content-center align-items-center pb-5 col-12">
-      {workOffice > 0 ? (
+      {workOffice <= 0 ? (
+        <div className="d-flex flex-column align-items-center">
+          <i
+            className={classnames(
+              styles.statisticIconHouse,
+              "bi bi-house-door"
+            )}
+          ></i>
+          <p
+            className={classnames(
+              styles.statisticInformation,
+              "text-align font-weight-light"
+            )}
+          >
+            Dziś wszyscy pracują w domu, biuro jest puste
+          </p>
+        </div>
+      ) : (
         <>
           <div className="d-flex justify-content-center align-items-center row">
             <PieChart
@@ -108,18 +100,6 @@ const Statistics: React.FC = () => {
             biurek.
           </div>
         </>
-      ) : (
-        <div className="d-flex flex-column align-items-center">
-          <i className={classnames(styles.statisticIconHouse, "bi bi-house-door")}></i>
-        <p
-          className={classnames(
-            styles.statisticInformation,
-            "text-align font-weight-light"
-          )}
-        >
-          Dziś wszyscy pracują w domu, biuro jest puste
-        </p>
-        </div>
       )}
     </div>
   );

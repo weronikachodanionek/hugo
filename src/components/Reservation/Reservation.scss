@@ -3,34 +3,15 @@
   justify-content: center;
   align-items: center;
 }
-.ReactModal__Overlay {
-  @include centralize;
-  z-index: 5;
-}
-
-.ReactModal__Content {
- width: 60%;
- border-radius: 0;
-}
 
 $size-circle: 30px;
 $size-arrow: 26px;
-
-.reservation-modal {
-  width: auto;
-  padding: 20px 60px;
-  min-height: 50vh;
-}
+$lightBorder: rgba(255, 255, 255, 0.7);
 
 .reservation-close {
   width: 90%;
   font-size: 24px;
   color: $secondary;
-}
-
-.reservation-screen {
-  width: 100vw;
-  height: 100vh;
 }
 
 .reservation-required {
@@ -71,7 +52,7 @@ $size-arrow: 26px;
   border: 1px solid $white;
 
   &:hover {
-    color: rgba(255, 255, 255, 0.7);
+    color: $lightBorder;
   }
 }
 
@@ -115,7 +96,7 @@ $size-arrow: 26px;
   border: 1px solid transparent;
 
   &:hover {
-    border: 1px dashed rgba(255, 255, 255, 0.7);
+    border: 1px dashed $lightBorder;
     border-radius: 50%;
   }
 
@@ -142,21 +123,37 @@ $size-arrow: 26px;
 
   &.is-selected,
   &.is-highlighted {
-    border: 2px solid red !important;
-    background-color: antiquewhite !important;
+    border: 1px dashed $orange;
+    border-radius: 50%;
   }
 }
 
-.ReactCollapse--collapse {
-  width: 100%;
-  transition: height 500ms;
+.ReactModal__Overlay {
+  @include centralize;
+  z-index: 5;
 }
 
-.ReactCollapse--content {
-  transition: height 500ms;
+.ReactModal__Content {
+  width: 40%;
+  border-radius: 0;
+  inset-block: auto !important;
+  inset-inline: auto !important;
 }
 
+@media (max-width: 1375px) {
+  .ReactModal__Content {
+    width: 60%;
+  }
+}
 
-.buttonModal{
-  background-color: transparent !important;
+@media (max-width: 900px) {
+  .ReactModal__Content {
+    width: 75%;
+  }
+}
+
+@media (max-width: 650px) {
+  .ReactModal__Content {
+    width: 85%;
+  }
 }

@@ -7,7 +7,6 @@ import "../src/assets/styles/index.scss";
 import { ReservationContextProvider } from "./Context/ReservationContext";
 import { Calender, Header } from "./components";
 import { DataContextProvider } from "./Context/DataContext";
-import { CollapseContextProvider } from "./Context/ReservationCollapseContext";
 import ModRes from "./components/Reservation/Modal";
 
 moment.locale("pl");
@@ -16,7 +15,6 @@ const App: React.FC = () => {
   return (
     <ReservationContextProvider>
       <DataContextProvider>
-        <CollapseContextProvider>
           <ModalProvider>
             <div className={styles.app}>
               <Header />
@@ -24,7 +22,6 @@ const App: React.FC = () => {
               <Calender />
             </div>
           </ModalProvider>
-        </CollapseContextProvider>
       </DataContextProvider>
     </ReservationContextProvider>
   );

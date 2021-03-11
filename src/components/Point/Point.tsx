@@ -8,7 +8,7 @@ interface IPointProps {
 }
 
 const Point: React.FC<IPointProps> = ({ className, children, ...props }) => {
-  const [showTooltip, setShowTooltip] = useState<Boolean>(false);
+  const [tooltip, setTooltip] = useState<Boolean>(false);
 
   return (
     <div
@@ -17,12 +17,12 @@ const Point: React.FC<IPointProps> = ({ className, children, ...props }) => {
       )}
     >
       <i
-        onClick={() => setShowTooltip(!showTooltip)}
+        onClick={() => setTooltip(!tooltip)}
         className={classnames(styles.point, className, "bi bi-circle-fill")}
         {...props}
       ></i>
 
-      {showTooltip && (
+      {tooltip && (
         <div
           className={classnames(
             "d-flex justify-content-center align-items-center position-absolute",

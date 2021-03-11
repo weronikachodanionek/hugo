@@ -1,18 +1,17 @@
 import React, { useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import Slider from "react-slick";
+import moment from "moment";
 
 import { Day } from "..";
 
 import "react-tabs/style/react-tabs.scss";
-
-import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 import "./Days.scss";
 import { IDay } from "../../API/types";
 import { useDataContext } from "../../Context/DataContext";
 import { useReservationActionsContext } from "../../Context/ReservationContext";
-import moment from "moment";
 
 function SampleNextArrow(props: any) {
   const { onClick } = props;
@@ -53,16 +52,15 @@ const Days: React.FC = () => {
   };
 
   const handleSelect = (i: number): void => {
-    setDay(
-      moment(data.find((day: IDay) => day.tabIndex === i)?.date).toDate()
-    );
+    setDay(moment(data.find((day: IDay) => day.tabIndex === i)?.date).toDate());
     setTabIndex(i);
   };
+
   return (
     <>
       {data && (
         <Slider {...settings} className="slider-tabs d-flex  position-relative">
-          <div>
+          <div style={{border: "2px solid red"}}>
             <div
               className={
                 "calender d-flex justify-content-center align-items-start bg-gray"

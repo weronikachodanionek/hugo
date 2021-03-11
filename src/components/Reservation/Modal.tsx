@@ -21,9 +21,9 @@ const ModalReservation: React.FC<IModalReservation> = ({
   });
 
   const handleClick = (): void => {
-    showModal()
+    showModal();
     handleModalReservation && handleModalReservation();
-  }
+  };
 
   return (
     <div className="buttonModal d-flex justify-content-center align-items-center pt-5 pb-5">

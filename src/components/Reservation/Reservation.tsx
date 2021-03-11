@@ -1,6 +1,8 @@
-import React, { EventHandler, FormEventHandler, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment";
 import SimpleReactCalendar from "simple-react-calendar";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 import { Button, InputSelect } from "../common";
 
@@ -29,13 +31,21 @@ export interface IReservationModal {
 }
 
 const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
+
+  const ReservationSchema = Yup.object().shape({
+    userId: Yup.object().shape({
+      label: Yup.string().required("Required"),
+      value: Yup.string().required("Required")
+  })
+  });
+
+
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
   const {
     room,
     desk,
     user: contextUser,
     day: contextDay,
-    tabDay
   } = useReservationContext();
   const { data, users } = useDataContext();
   const { setData, setUsers } = useDataActionsContext();
@@ -83,8 +93,12 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
-  const handleReservation = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+
+  const handleReservation = () => {
+    //e.preventDefault();
+    //e: React.FormEvent<HTMLFormElement>
+
+    
     const tempDay: IDay[] = data.map((day: IDay) =>
       moment(day.date).isSame(contextDay, "day")
         ? {
@@ -124,11 +138,26 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
             ...dailyUser,
           }
     );
-
     setData(tempDay);
     setUsers(tempUsers);
     closeModal();
   };
+
+  
+  const formik = useFormik({
+    initialValues: {
+      userId: {
+        value: "",
+        label: "",
+      }
+    },
+    validationSchema: ReservationSchema,
+
+    onSubmit: () => {
+      
+          handleReservation()    
+    },
+  });
 
   return (
     <div className="bg-white d-flex justify-content-center align-items-center flex-column">
@@ -136,7 +165,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         onClick={closeModal}
         className="bi bi-x reservation-close d-flex justify-content-end"
       ></i>
-      <form onSubmit={handleReservation}>
+      <form onSubmit={formik.handleSubmit}>
         <InputSelect
           inputId="UserId"
           label="Podaj swoje imię"
@@ -145,6 +174,9 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
           onChange={(option: ISelectOptions) => setUser(option.label)}
           value={userValue}
         />
+
+{formik.errors.userId?.value && <div >*To pole jest wymagane</div>}
+          
 
         <InputSelect
           inputId="RoomId"
@@ -184,7 +216,11 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         />
 
         <div className="d-flex justify-content-center">
-          <Button className="btn btn-violet" type="submit">
+          <Button            
+            className="btn btn-violet"
+            type="submit"
+            onClick={handleReservation}
+          >
             Zarezerwuj biurko
           </Button>
         </div>
