@@ -31,14 +31,11 @@ export interface IReservationModal {
 }
 
 const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
-
   const ReservationSchema = Yup.object().shape({
-    userId: Yup.object().shape({
-      label: Yup.string().required("Required"),
-      value: Yup.string().required("Required")
-  })
+    userId: Yup.string().required("Required"),
+    roomId: Yup.string().required("Required"),
+    deskId: Yup.string().required("Required"),
   });
-
 
   const { setRoom, setDesk, setDay, setUser } = useReservationActionsContext();
   const {
@@ -93,12 +90,10 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
-
   const handleReservation = () => {
-    //e.preventDefault();
+    //  e.preventDefault();
     //e: React.FormEvent<HTMLFormElement>
 
-    
     const tempDay: IDay[] = data.map((day: IDay) =>
       moment(day.date).isSame(contextDay, "day")
         ? {
@@ -143,21 +138,33 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
     closeModal();
   };
 
-  
   const formik = useFormik({
     initialValues: {
-      userId: {
-        value: "",
-        label: "",
-      }
+      userId: userValue,
+      roomId: roomValue,
+      deskId: deskValue,
     },
     validationSchema: ReservationSchema,
 
     onSubmit: () => {
-      
-          handleReservation()    
+      handleReservation();
     },
   });
+
+  const handleFormikUserChange = (option: ISelectOptions) => {
+    setUser(option.value);
+    formik.setFieldValue("userId", option.value);
+  };
+
+  const handleFormikRoomChange = (option: ISelectOptions) => {
+    setRoom(option.value);
+    formik.setFieldValue("roomId", option.value);
+  };
+
+  const handleFormikDeskChange = (option: ISelectOptions) => {
+    setDesk(option.value);
+    formik.setFieldValue("deskId", option.value);
+  };
 
   return (
     <div className="bg-white d-flex justify-content-center align-items-center flex-column">
@@ -165,36 +172,48 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         onClick={closeModal}
         className="bi bi-x reservation-close d-flex justify-content-end"
       ></i>
+
       <form onSubmit={formik.handleSubmit}>
         <InputSelect
-          inputId="UserId"
+          inputId="userId"
           label="Podaj swoje imię"
           options={usersOptions}
           placeholder="Podaj swoje imię"
-          onChange={(option: ISelectOptions) => setUser(option.label)}
+          onChange={handleFormikUserChange}
           value={userValue}
         />
 
-{formik.errors.userId?.value && <div >*To pole jest wymagane</div>}
-          
+        {formik.errors.userId && (
+          <div className="reservation-required">* Proszę podać swoje imię</div>
+        )}
 
         <InputSelect
-          inputId="RoomId"
+          inputId="roomId"
           label="Wybierz pokój, który chcesz zarezerwować"
           options={roomsOptions}
           placeholder="Wybierz pokój"
-          onChange={(option: ISelectOptions) => setRoom(option.value)}
+          //onChange={(option: ISelectOptions) => setRoom(option.value)}
+          onChange={handleFormikRoomChange}
           value={roomValue}
         />
 
+        {formik.errors.roomId && (
+          <div className="reservation-required">* Proszę wybrać pokój</div>
+        )}
+
         <InputSelect
-          inputId="DeskId"
+          inputId="deskId"
           label="Wybierz biurko, które chcesz zarezerwować"
           options={desks}
           placeholder="Wybierz biurko"
-          onChange={(option: ISelectOptions) => setDesk(option.value)}
+          //onChange={(option: ISelectOptions) => setDesk(option.value)}
           value={deskValue}
+          onChange={handleFormikDeskChange}
         />
+
+        {formik.errors.deskId && (
+          <div className="reservation-required">* Proszę wybrać biurko</div>
+        )}
 
         <div className="input-label">Wybierz datę</div>
 
@@ -216,10 +235,10 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         />
 
         <div className="d-flex justify-content-center">
-          <Button            
+          <Button
             className="btn btn-violet"
             type="submit"
-            onClick={handleReservation}
+            onClick={() => handleReservation}
           >
             Zarezerwuj biurko
           </Button>
