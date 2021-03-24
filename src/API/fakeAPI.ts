@@ -1,4 +1,5 @@
 import { Days } from "./mocks/day";
+import { IUser, users } from "./mocks/users";
 import { DailyUsers, IDailyUsers } from "./mocks/usersPerDay";
 import { IDay } from "./types";
 
@@ -24,4 +25,15 @@ function getAllUsers(): Promise<IDailyUsers[]> {
   return usersPromise;
 }
 
-export { getAllPlaces, getAllUsers };
+function getUsersForSelect(): Promise<IUser[]> {
+  const usersPromise = new Promise<IUser[]>((resolve, reject) => {
+    setTimeout(() => {
+      const error = Math.floor(Math.random() * 100) === 0;
+      return error ? reject("Error") : resolve(users);
+    }, 500);
+  });
+  
+  return usersPromise;
+}
+
+export { getAllPlaces, getAllUsers, getUsersForSelect };

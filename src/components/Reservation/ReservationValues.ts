@@ -1,35 +1,26 @@
-
-
 export interface IReservationValues {
-    UserId: string | undefined;
-    RoomId: string | undefined;
-    DeskId: string | undefined;
-  }
-  
-//   export const initialValues: IReservationValues = {
-//    UserId: "",
-//    RoomId: "",
-//    DeskId: ""
-//   };
-  
+  UserId: string | undefined;
+  RoomId: string | undefined;
+  DeskId: string | undefined;
+}
 
-  export interface IReservationFormData {
-      name: string | undefined;
-      room: string | undefined,
-      desk: string | undefined,
-  }
+export interface IReservationFormData {
+  name: string | undefined;
+  room: string | undefined;
+  desk: string | undefined;
+}
 
-  function reservationForm(values: IReservationValues): IReservationFormData {
-      const dataReservaion = {
-          name: values.UserId,
-          room: values.RoomId,
-          desk: values.DeskId
-      };
-      return dataReservaion
-  }
+function reservationForm(values: IReservationValues): IReservationFormData {
+  const dataReservaion = {
+    name: values.UserId,
+    room: values.RoomId,
+    desk: values.DeskId,
+  };
+  return dataReservaion;
+}
 
-  async function sendReservation(dataReservation: IReservationFormData){
-      console.log("Zarezerwowano", dataReservation)
-  }
+async function sendReservation(dataReservation: IReservationFormData) {
+  console.log("Zarezerwowano", dataReservation);
+}
 
-  export {reservationForm, sendReservation}
+export { reservationForm, sendReservation };

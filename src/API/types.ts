@@ -23,8 +23,3 @@ export interface IDesk {
   user?: string;
   available?: string;
 }
-
-export interface IUsername {
-  id: string;
-  userName: string;
-}

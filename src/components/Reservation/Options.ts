@@ -1,4 +1,4 @@
-import { IRoom, IUsername } from "../../API/types";
+import { IRoom } from "../../API/types";
 
 export interface ISelectOptions {
   value: string;
@@ -59,17 +59,4 @@ export const roomsData: IRoom[] = [
       },
     ],
   },
-];
-
-export const usersData: IUsername[] = [
-  { id: "1", userName: "Oktawiusz August" },
-  { id: "2", userName: "Tyberiusz" },
-  { id: "3", userName: "Kaligula" },
-  { id: "4", userName: "Neron" },
-  { id: "5", userName: "Galba" },
-  { id: "6", userName: "Oton" },
-  { id: "7", userName: "Witeliusz" },
-  { id: "8", userName: "Wespazjan" },
-  { id: "9", userName: "Tytus" },
-  { id: "10", userName: "Domicjan" },
 ];

@@ -39,6 +39,8 @@
     "case-sensitive-paths-webpack-plugin": "2.3.0",
     "classnames": "^2.2.6",
     "css-loader": "4.3.0",
+    "cypress": "^6.8.0",
+    "cypress-react-selector": "^2.3.6",
     "dotenv": "8.2.0",
     "dotenv-expand": "5.1.0",
     "eslint": "^7.11.0",
@@ -90,6 +92,7 @@
     "react-refresh": "^0.8.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-script": "^2.0.5",
     "react-select": "^4.1.0",
     "react-slick": "^0.28.1",
     "react-tabs": "^3.2.0",
@@ -117,7 +120,9 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js"
+    "test": "node scripts/test.js",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "eslintConfig": {
     "extends": [
@@ -192,6 +197,17 @@
   "babel": {
     "presets": [
       "react-app"
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-proposal-decorators",
+        {
+          "legacy": true
+        }
+      ]
     ]
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.7"
   }
 }

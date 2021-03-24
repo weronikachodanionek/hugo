@@ -9,14 +9,8 @@ import { Button, InputSelect } from "../common";
 import "./Reservation.scss";
 import { IDailyUsers } from "../../API/mocks/usersPerDay";
 import { IUser, LocationType } from "../../API/mocks/users";
-import { ISelectOptions, roomsData, usersData } from "./Options";
-import {
-  AvailabilityType,
-  IDay,
-  IDesk,
-  IRoom,
-  IUsername,
-} from "../../API/types";
+import { ISelectOptions, roomsData } from "./Options";
+import { AvailabilityType, IDay, IDesk, IRoom } from "../../API/types";
 import {
   useDataActionsContext,
   useDataContext,
@@ -44,7 +38,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
     user: contextUser,
     day: contextDay,
   } = useReservationContext();
-  const { data, users } = useDataContext();
+  const { data, users, selectUsers } = useDataContext();
   const { setData, setUsers } = useDataActionsContext();
 
   const [roomValue, setRoomValue] = useState<ISelectOptions>();
@@ -56,15 +50,28 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
     value: room.id,
   }));
 
-  const usersOptions: ISelectOptions[] = usersData.map((user: IUsername) => ({
-    label: user.userName,
-    value: user.id,
+  const usersOptions: ISelectOptions[] = selectUsers.map((user: IUser) => ({
+    label: user.name,
+    value: user.id.toString(),
   }));
 
   const [desks, setDesks] = useState<ISelectOptions[]>([]);
 
   useEffect(() => {
+    return () => {
+      setRoomValue(undefined);
+      setDeskValue(undefined);
+      setUserValue(undefined);
+      setRoom(undefined);
+      setDesk(undefined);
+      setUser(undefined);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     setDeskValue(desks.find((option: ISelectOptions) => option.value === desk));
+    formik.setFieldValue("deskId", desk);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [desk, desks]);
 
@@ -87,6 +94,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         value: desk.id,
       })) ?? []
     );
+    formik.setFieldValue("roomId", room);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [room]);
 
@@ -104,7 +112,9 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
                 deskData.id === desk
                   ? {
                       ...deskData,
-                      user: contextUser,
+                      user: selectUsers.find(
+                        (user: IUser) => user.id === contextUser
+                      )?.name,
                       available: AvailabilityType.unavailable,
                     }
                   : { ...deskData }
@@ -121,7 +131,7 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
         ? {
             ...dailyUser,
             users: dailyUser.users.map((user: IUser) =>
-              user.name === contextUser
+              user.id === contextUser
                 ? {
                     ...user,
                     location: LocationType.office,
@@ -158,12 +168,10 @@ const Reservation: React.FC<IReservationModal> = ({ closeModal }) => {
 
   const handleFormikRoomChange = (option: ISelectOptions) => {
     setRoom(option.value);
-    formik.setFieldValue("roomId", option.value);
   };
 
   const handleFormikDeskChange = (option: ISelectOptions) => {
     setDesk(option.value);
-    formik.setFieldValue("deskId", option.value);
   };
 
   return (
